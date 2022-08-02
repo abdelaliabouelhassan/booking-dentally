@@ -140,7 +140,7 @@ export default {
       this.end_date = new Date();
       this.end_date.setHours(this.end_date.getHours() + 24 * 7);
       let endTimeString = this.end_date.toISOString();
-      let duration = 5;
+      let duration = 30;
       var ids = [this.store.practitioner.id];
       this.axios
         .get(
@@ -150,7 +150,9 @@ export default {
             startTimeString +
             "&finish_time=" +
             endTimeString +
-            ""
+
+            "&duration=" +
+            duration
         )
         .then((response) => {
           this.appointments = response.data;
