@@ -310,8 +310,7 @@
           href="javascript:void(0)"
           @click="Confirm"
           class="
-            bg-[#BA812E]
-            hover:bg-[#BA812E80]
+            bg-[#BA812E]  hover:bg-opacity-90
             text-white
             rounded-full
             p-4

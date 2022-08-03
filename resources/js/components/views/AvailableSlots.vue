@@ -7,8 +7,8 @@
       </div>
     </template>
     <template v-slot:current-options>
-      <ul class="uppercase text-white marker:text-theme-gold list-disc ">
-       <li class=" flex items-center space-x-2 text-xs">
+      <ul class="uppercase text-white marker:text-theme-gold list-disc">
+        <li class="flex items-center space-x-2 text-xs">
           <span>{{ store.treatments.name }}</span>
           <svg
             width="10"
@@ -22,25 +22,29 @@
           <span>{{ store.practitioner.name }}</span>
         </li>
       </ul>
-      
     </template>
     <template v-slot:body>
       <div v-if="!loading">
-        <div class=" p-10">
-                  <SlotsTimes v-for="(date,index,key) in GroupByDate(appointments.availability)" :key="key" :index="key" :date="index" :dates="date" />
-
+        <div class="p-10">
+          <SlotsTimes
+            v-for="(date, index, key) in GroupByDate(appointments.availability)"
+            :key="key"
+            :index="key"
+            :date="index"
+            :dates="date"
+          />
         </div>
         <div class="space-y-8 px-8 pb-4">
           <ul class="grid gap-4 grid-cols-1 text-center leading-tight">
             <li>
               <a
-               @click="PickDate"
+                @click="PickDate"
                 href="javascript:void(0)"
                 class="
                   text-sm
                   uppercase
                   font-semibold
-                  block
+                  flex
                   p-2
                   rounded-full
                   border border-theme-gray-light
@@ -48,17 +52,29 @@
                 "
                 style="letter-spacing: 6px"
               >
-                <img
-                  :src="'assets/calendar.svg'"
-                  style="
-                    width: 12px;
-                    display: inline;
-                    padding-bottom: 3px;
-                    filter: invert(100%) sepia(24%) saturate(6847%)
-                      hue-rotate(308deg) brightness(92%) contrast(91%);
-                  "
-                />
-                Pick a date
+                <div  class=" flex items-center space-x-2 m-auto">
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 13 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.56814 2.13982H3.17039C1.9926 2.13982 1.03781 3.11078 1.03781 4.30852V9.73025C1.03781 10.928 1.9926 11.8989 3.17039 11.8989H9.56814C10.7459 11.8989 11.7007 10.928 11.7007 9.73025V4.30852C11.7007 3.11078 10.7459 2.13982 9.56814 2.13982Z"
+                      stroke="#BA812E"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M4.23668 1.05548V3.22417M8.50185 1.05548V3.22417M1.03781 5.39287H11.7007"
+                      stroke="#BA812E"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span> Pick a date</span>
+                </div>
               </a>
             </li>
           </ul>
@@ -69,7 +85,6 @@
           <LoadingSpiner />
         </div>
       </div>
-     
     </template>
 
     <template v-slot:pagination>
@@ -115,7 +130,6 @@ export default {
       stat_date: "",
       end_date: "",
       duration: 5,
-    
     };
   },
 
@@ -126,7 +140,7 @@ export default {
         name: "select-dentist",
       });
     },
-    PickDate(){
+    PickDate() {
       this.store.step++;
       this.$router.push({
         name: "pick-date",
@@ -150,7 +164,6 @@ export default {
             startTimeString +
             "&finish_time=" +
             endTimeString +
-
             "&duration=" +
             duration
         )

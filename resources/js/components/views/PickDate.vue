@@ -128,7 +128,7 @@
                     h-6
                     rounded-full
                     bg-gray-400
-                    hover:bg-yellow-400
+                    hover:bg-primary-100
                     flex
                   "
                   v-if="item.date == today"
@@ -138,9 +138,9 @@
                 <div
                   class="absolute w-6 h-6 rounded-full  flex"
                   :class="{
-                    'text-mainsublack hover:bg-yellow-400': !item.padding && !item.past,
+                    'text-mainsublack hover:bg-primary-100': !item.padding && !item.past,
                     ' text-gray-200': item.padding || item.past,
-                    'bg-yellow-400': selectedDate == item.date,
+                    'bg-primary-100': selectedDate == item.date,
                   }"
                   v-else
                 >
@@ -174,7 +174,7 @@
                   uppercase
                   font-semibold
                   tracking-10
-                  block
+                  flex
                   p-2
                   rounded-full
                   border border-theme-gray-light
@@ -183,17 +183,31 @@
                 "
                 style="letter-spacing: 6px"
               >
-                <img
-                  :src="'assets/calendar.svg'"
-                  style="
-                    width: 12px;
-                    display: inline;
-                    padding-bottom: 3px;
-                    filter: invert(100%) sepia(24%) saturate(6847%)
-                      hue-rotate(308deg) brightness(92%) contrast(91%);
-                  "
-                />
-                Next Available Slot
+              
+              <div class=" flex items-center space-x-2 m-auto">
+                  <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.56814 2.13982H3.17039C1.9926 2.13982 1.03781 3.11078 1.03781 4.30852V9.73025C1.03781 10.928 1.9926 11.8989 3.17039 11.8989H9.56814C10.7459 11.8989 11.7007 10.928 11.7007 9.73025V4.30852C11.7007 3.11078 10.7459 2.13982 9.56814 2.13982Z"
+                    stroke="#BA812E"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M4.23668 1.05548V3.22417M8.50185 1.05548V3.22417M1.03781 5.39287H11.7007"
+                    stroke="#BA812E"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+
+                <span> Next Available Slot</span>
+              </div>
               </a>
             </li>
           </ul>
