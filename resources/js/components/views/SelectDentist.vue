@@ -71,7 +71,7 @@
     </template>
    
     <template v-slot:pagination>
-          <p class="text-theme-gray-light">2 of 4</p>
+          <p class="text-theme-gray-light">3 of 5</p>
     </template>  
    
     <template v-slot:buttons>
@@ -122,7 +122,7 @@ export default {
     goBack(){
       this.store.step--;
         this.$router.push({
-            name: 'index'
+            name: 'select-treatment'
         })
     },
     loadDentist(){

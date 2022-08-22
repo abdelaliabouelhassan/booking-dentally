@@ -295,7 +295,7 @@
     </template>
 
     <template v-slot:pagination>
-      <p class="text-theme-gray-light">4 of 4</p>
+      <p class="text-theme-gray-light">5 of 5</p>
     </template>
 
     <template v-slot:buttons>
@@ -481,7 +481,8 @@ export default {
           payment_plan_id: 4438,
           dentist_id: this.store.practitioner.id,
           email_address: this.store.details.email,
-          preferred_phone_number: this.store.details.phone,
+          mobile_phone:this.store.details.phone_number,
+          home_phone:this.store.details.phone_number,
         })
         .then((response) => {
           //collect data
@@ -498,7 +499,7 @@ export default {
           start_time: this.store.availableTime.start_time,
           finish_time: this.store.availableTime.finish_time,
           practitioner_id: this.store.practitioner.id,
-          reason: "Exam",
+          reason:  "Dr Affan consultation new patient exam",
           patient_id: this.store.details.id,
         })
         .then((response) => {

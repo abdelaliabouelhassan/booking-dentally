@@ -216,7 +216,7 @@
     </template>
 
     <template v-slot:pagination>
-      <p class="text-theme-gray-light">3 of 4</p>
+      <p class="text-theme-gray-light">4 of 5</p>
     </template>
 
     <template v-slot:buttons>
@@ -287,7 +287,7 @@ export default {
       appointments: [],
       stat_date: "",
       end_date: "",
-      duration: 5,
+      duration: 30,
       displayYear: new Date().getFullYear(),
     };
   },
@@ -430,7 +430,7 @@ export default {
       this.end_date = new Date(this.selectedDate);
       this.end_date.setHours(this.end_date.getHours() + 25);
       let endTimeString = this.end_date.toISOString();
-      let duration = 30;
+      let duration = this.duration;
       var ids = [this.store.practitioner.id];
       this.axios
         .get(
