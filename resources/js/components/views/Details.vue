@@ -501,7 +501,7 @@ export default {
       var finish_date_time = null;
       //add 30 minutes to finish_date_time
       var date = new Date(start_date_time);
-      date.setMinutes(date.getMinutes() + 90);
+      date.setMinutes(date.getMinutes() + 30);
       finish_date_time = date.toISOString();
 
       await this.axios
