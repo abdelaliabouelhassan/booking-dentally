@@ -310,13 +310,16 @@
           href="javascript:void(0)"
           @click="Confirm"
           class="
-            bg-[#BA812E]  hover:bg-opacity-90
+            bg-[#BA812E]
+            hover:bg-opacity-90
             text-white
             rounded-full
             p-4
             w-full
           "
-          > <LoadingSpiner v-if="loading"/> <span v-else>Confirm and Book</span></a
+        >
+          <LoadingSpiner v-if="loading" />
+          <span v-else>Confirm and Book</span></a
         >
       </div>
     </template>
@@ -336,7 +339,7 @@ export default {
 
   data() {
     return {
-      loading:false,
+      loading: false,
       store: useStore(),
       days: [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -455,7 +458,7 @@ export default {
       });
     },
     async Confirm() {
-      if(this.loading){
+      if (this.loading) {
         return;
       }
       this.clearError();
@@ -481,8 +484,8 @@ export default {
           payment_plan_id: 4438,
           dentist_id: this.store.practitioner.id,
           email_address: this.store.details.email,
-          mobile_phone:this.store.details.phone_number,
-          home_phone:this.store.details.phone_number,
+          mobile_phone: this.store.details.phone_number,
+          home_phone: this.store.details.phone_number,
         })
         .then((response) => {
           //collect data
@@ -494,12 +497,19 @@ export default {
         });
     },
     async createaApointment() {
+      var start_date_time = this.store.availableTime.start_time;
+      var finish_date_time = null;
+      //add 30 minutes to finish_date_time
+      var date = new Date(start_date_time);
+      date.setMinutes(date.getMinutes() + 90);
+      finish_date_time = date.toISOString();
+
       await this.axios
         .post("appointments", {
           start_time: this.store.availableTime.start_time,
-          finish_time: this.store.availableTime.finish_time,
+          finish_time: finish_date_time,
           practitioner_id: this.store.practitioner.id,
-          reason:  "Dr Affan consultation new patient exam",
+          reason: "Dr Affan consultation new patient exam",
           patient_id: this.store.details.id,
         })
         .then((response) => {
@@ -524,9 +534,10 @@ export default {
           this.$router.push({
             name: "confirmation",
           });
-        }).catch((error)=>{
-          alert('something went wrong, please try again later');
         })
+        .catch((error) => {
+          alert("something went wrong, please try again later");
+        });
     },
     loadSite() {
       this.axios

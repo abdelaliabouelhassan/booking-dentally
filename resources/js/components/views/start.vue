@@ -28,7 +28,7 @@
                 border-theme-gold
               "
             >
-              WakeField
+             Space Dental - Wakefield
             </a>
           </li>
 
