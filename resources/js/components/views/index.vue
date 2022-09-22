@@ -17,17 +17,19 @@
           <li
             v-for="(Treatment, index, key) in Treatments"
             :key="key"
-            v-show="Treatment.id == 144000"
+            
           >
+          <!-- v-show="Treatment.id == 144000" -->
             <a
               @click="SelectTreatment(Treatment)"
               href="javascript:void(0)"
               class="block p-4 rounded-full border-2 hover:border-theme-gold"
               :class="{
-                'border-theme-gold': store.treatments.id == Treatment.id,
+                'border-theme-gold': store.treatments.key == Treatment.key,
               }"
             >
-              {{ Treatment.patient_nomenclature ?? Treatment.nomenclature }}
+              <!-- {{ Treatment.patient_nomenclature ?? Treatment.nomenclature }} -->
+              {{ Treatment.name }}
             </a>
           </li>
         </ul>
@@ -76,7 +78,18 @@ export default {
     return {
       store: useStore(),
       selectedTreatment: null,
-      Treatments: [],
+      Treatments: [
+        {
+          name: "Smile Makeover",
+          id: 144000,
+          key: "1",
+        },
+        {
+          name: "Implant Consultation",
+          id: 144000,
+           key: "2",
+        },
+      ],
       currentPage: 1,
       totalPages: 1,
       loading: false,
@@ -85,20 +98,22 @@ export default {
   methods: {
     SelectTreatment(Treatment) {
       this.store.treatments.id = Treatment.id;
-      this.store.treatments.name = Treatment.patient_nomenclature;
+      // this.store.treatments.name = Treatment.patient_nomenclature;
+      this.store.treatments.name = Treatment.name;
+      this.store.treatments.key = Treatment.key;
       this.store.step++;
       this.$router.push({ name: "select-dentist" });
     },
-    loadTreatment() {
-      this.loading = true;
-      this.axios.get("treatments?page=" + this.currentPage).then((response) => {
-        this.Treatments = response.data.treatments;
-        this.totalPages = response.data.meta.total_pages;
-        this.currentPage = response.data.meta.current_page;
-        console.log(response.data);
-        this.loading = false;
-      });
-    },
+    // loadTreatment() {
+    //   this.loading = true;
+    //   this.axios.get("treatments?page=" + this.currentPage).then((response) => {
+    //     this.Treatments = response.data.treatments;
+    //     this.totalPages = response.data.meta.total_pages;
+    //     this.currentPage = response.data.meta.current_page;
+    //     console.log(response.data);
+    //     this.loading = false;
+    //   });
+    // },
     LoadMore() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
@@ -123,7 +138,7 @@ export default {
   },
   created() {
     // this.CheckSteps();
-    this.loadTreatment();
+    //this.loadTreatment();
   },
 };
 </script>

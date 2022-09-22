@@ -23,6 +23,7 @@ class CollectBookedData extends Controller
         $record->appointment_end_date =  Carbon::parse($request->availableTime['finish_time']);
         $record->appointment_duration = $request->availableTime['available_duration'];
         $record->patient_id = $request->details['id'];
+        $record->patient_title = $request->details['title'];
         $record->patient_first_name = $request->details['first_name'];
         $record->patient_last_name = $request->details['last_name'];
         $record->patient_email = $request->details['email'];
@@ -33,5 +34,14 @@ class CollectBookedData extends Controller
         $record->patient_image = $request->details['image'];
         $record->save();
         return response()->json(['success' => 'Record saved successfully.']);
+    }
+
+    public function check(Request $request){
+      $record = BookedApiRecord::where('patient_email', $request->email)->orWhere('patient_phone',$request->phone)->first();
+        if($record){
+            return response()->json(['found' =>  true]);
+        }else{
+            return response()->json(['found' =>  false]);
+        }
     }
 }

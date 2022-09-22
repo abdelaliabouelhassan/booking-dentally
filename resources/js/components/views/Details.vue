@@ -48,6 +48,37 @@
         <h1 class="uppercase font-semibold">Your details</h1>
 
         <div class="w-full flex flex-col items-start space-y-4">
+          <div class="flex flex-col items-start space-y-1 w-full">
+            <span class="text-xs font-medium text-red-600">{{
+              errors.title
+            }}</span>
+            <select
+              v-model="store.details.title"
+              name=""
+              id=""
+              class="
+                text-xs text-[#525252]
+                font-bold
+                placeholder-[#D9D9D9]
+                w-full
+                py-4
+                px-4
+                outline-none
+                rounded-full
+                border-[0.5px] border-[#52525280]
+                hover:border-[#BA812E]
+                focus:border-[#BA812E]
+              "
+              :class="{ 'border-red-500': errors.title }"
+            >
+              <option value="" selected disabled>Title</option>
+              <option value="Mr">Mr</option>
+              <option value="Mrs">Mrs</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms">Ms</option>
+              <option value="Dr">Dr</option>
+            </select>
+          </div>
           <div class="w-full flex flex-col items-start space-y-1">
             <span class="text-xs font-medium text-red-600">{{
               errors.first_name
@@ -308,7 +339,7 @@
         >
         <a
           href="javascript:void(0)"
-          @click="Confirm"
+          @click="validate"
           class="
             bg-[#BA812E]
             hover:bg-opacity-90
@@ -328,6 +359,7 @@
 
 
 <script>
+const api = import.meta.env.VITE_APP_DENTALLY_API;
 import MainLayouts from "@/components/layouts/MainLayouts.vue";
 import LoadingSpiner from "@/components/icons/LoadingSpiner.vue";
 import { useStore } from "@/stores/AppointmentStore.js";
@@ -350,6 +382,7 @@ export default {
       sites: [],
       errors: [
         {
+          title: "",
           first_name: "",
           last_name: "",
           email: "",
@@ -372,6 +405,10 @@ export default {
     validate() {
       this.errors = [];
       var valid = true;
+      if (this.store.details.title == "") {
+        this.errors.title = "Title is required";
+        valid = false;
+      }
       if (this.store.details.first_name == "") {
         this.errors.first_name = "First Name is required";
         valid = false;
@@ -416,7 +453,9 @@ export default {
         valid = false;
       }
 
-      return valid;
+     if(valid){
+        this.checkEmailAndPhone();
+     }
     },
     clearError() {
       this.errors = [
@@ -457,18 +496,36 @@ export default {
         name: "available-slots",
       });
     },
+    async checkEmailAndPhone() {
+      this.axios.defaults.baseURL = "/api/";
+      await this.axios
+        .post("check", {
+          email: this.store.details.email,
+          phone: this.store.details.phone_number,
+        })
+        .then((response) => {
+          console.log(response.data.found);
+          if (response.data.found == true) {
+            
+            this.$router.push({ name: "already-booked" });
+            return false
+          } else {
+            this.Confirm();
+          }
+
+          
+        });
+    },
     async Confirm() {
       if (this.loading) {
         return;
       }
       this.clearError();
-      if (!this.validate()) {
-        return;
-      }
       this.loading = true;
+      this.axios.defaults.baseURL = api;
       await this.axios
         .post("patients", {
-          title: "Mr",
+          title: this.store.details.title,
           first_name: this.store.details.first_name,
           last_name: this.store.details.last_name,
           date_of_birth:
@@ -503,7 +560,7 @@ export default {
       var date = new Date(start_date_time);
       date.setMinutes(date.getMinutes() + 30);
       finish_date_time = date.toISOString();
-
+      this.axios.defaults.baseURL = api;
       await this.axios
         .post("appointments", {
           start_time: this.store.availableTime.start_time,
@@ -540,6 +597,7 @@ export default {
         });
     },
     loadSite() {
+      this.axios.defaults.baseURL = api;
       this.axios
         .get("sites/" + this.store.practitioner.site_id)
         .then((response) => {

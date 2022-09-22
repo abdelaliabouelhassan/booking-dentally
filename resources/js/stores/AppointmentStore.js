@@ -7,6 +7,7 @@ export const useStore = defineStore('AppointmentStore', {
             treatments:{
                 id:50,
                 name:'',
+                key:null
             },
             practitioner:{
                 id:null,
@@ -22,6 +23,7 @@ export const useStore = defineStore('AppointmentStore', {
             details:{
                 id:null,
                 image:null,
+                title:'',
                 first_name:'',
                 last_name:'',
                 email:'',

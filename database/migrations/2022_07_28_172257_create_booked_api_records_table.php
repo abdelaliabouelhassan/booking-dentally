@@ -25,6 +25,7 @@ return new class extends Migration
             $table->dateTime('appointment_end_date');
             $table->string('appointment_duration');
             $table->integer('patient_id');
+            $table->string('patient_title');
             $table->string('patient_first_name');
             $table->string('patient_last_name');
             $table->string('patient_email');

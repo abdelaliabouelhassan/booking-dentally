@@ -8,6 +8,7 @@ import AvailableSlots from '@/components/views/AvailableSlots.vue'
 import PickDate from '@/components/views/PickDate.vue'
 import Details from '@/components/views/Details.vue'
 import Confirmation from '@/components/views/Confirmation.vue'
+import alreadyBooked from '@/components/views/alreadyBooked.vue'
 const routes = [
   { path: '/', component: Start },
   { path: '/dashboard', component: Start, name: 'index' },
@@ -17,6 +18,7 @@ const routes = [
   { path: '/pick-date', component: PickDate, name: 'pick-date' },
   { path: '/details', component: Details, name: 'details' },
   { path: '/confirmation', component: Confirmation, name: 'confirmation' },
+  { path: '/already-booked', component: alreadyBooked, name: 'already-booked' },
 
 ]
 

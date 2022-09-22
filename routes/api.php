@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/booked-record-store', [CollectBookedData::class, 'store']);
+Route::post('/check', [CollectBookedData::class, 'check']);
