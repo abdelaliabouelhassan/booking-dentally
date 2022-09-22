@@ -53,7 +53,7 @@
               errors.title
             }}</span>
             <select
-              v-model="store.details.title"
+              v-model.trim="store.details.title"
               name=""
               id=""
               class="
@@ -84,7 +84,7 @@
               errors.first_name
             }}</span>
             <input
-              v-model="store.details.first_name"
+              v-model.trim="store.details.first_name"
               type="text"
               placeholder="First Name"
               class="
@@ -109,7 +109,7 @@
               errors.last_name
             }}</span>
             <input
-              v-model="store.details.last_name"
+              v-model.trim="store.details.last_name"
               type="text"
               placeholder="Last Name"
               class="
@@ -137,7 +137,7 @@
                   errors.day
                 }}</span>
                 <select
-                  v-model="store.details.day"
+                  v-model.trim="store.details.day"
                   name=""
                   id=""
                   class="
@@ -166,7 +166,7 @@
                   errors.month
                 }}</span>
                 <select
-                  v-model="store.details.month"
+                  v-model.trim="store.details.month"
                   name=""
                   id=""
                   class="
@@ -195,7 +195,7 @@
                   errors.year
                 }}</span>
                 <select
-                  v-model="store.details.year"
+                  v-model.trim="store.details.year"
                   name=""
                   id=""
                   class="
@@ -226,7 +226,7 @@
               errors.phone_number
             }}</span>
             <input
-              v-model="store.details.phone_number"
+              v-model.trim="store.details.phone_number"
               type="text"
               placeholder="Contact Number"
               class="
@@ -251,7 +251,7 @@
               errors.email
             }}</span>
             <input
-              v-model="store.details.email"
+              v-model.trim="store.details.email"
               type="text"
               placeholder="Email Address"
               class="
@@ -276,7 +276,7 @@
               errors.postcode
             }}</span>
             <input
-              v-model="store.details.postcode"
+              v-model.trim="store.details.postcode"
               type="text"
               placeholder="Postcode"
               class="
@@ -301,7 +301,7 @@
               errors.address
             }}</span>
             <input
-              v-model="store.details.address"
+              v-model.trim="store.details.address"
               type="text"
               placeholder="Address"
               class="
