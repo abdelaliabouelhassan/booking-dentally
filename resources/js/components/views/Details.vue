@@ -557,8 +557,15 @@ export default {
       var start_date_time = this.store.availableTime.start_time;
       var finish_date_time = null;
       //add 30 minutes to finish_date_time
+      var min = 30;
+      if(this.store.practitioner.id == 14615){
+        min = 15;
+      }
+      else{
+        min = 20;
+      }
       var date = new Date(start_date_time);
-      date.setMinutes(date.getMinutes() + 30);
+      date.setMinutes(date.getMinutes() + min);
       finish_date_time = date.toISOString();
       this.axios.defaults.baseURL = api;
       await this.axios
