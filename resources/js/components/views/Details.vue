@@ -558,8 +558,13 @@ export default {
       var finish_date_time = null;
       //add 30 minutes to finish_date_time
       var min = 30;
-      if(this.store.practitioner.id == 14615){
+      if(this.store.practitioner.id == 14615){ // dr affan
         min = 15;
+      }else if(this.store.practitioner.id == 72952){ //dr joe
+        min = 45;
+      }
+      else if(this.store.practitioner.id == 26362){ // dr saira
+        min = 30;
       }
       else{
         min = 20;
