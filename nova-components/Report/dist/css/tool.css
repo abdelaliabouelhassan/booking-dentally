@@ -1,2 +1,9 @@
 /* Nova Tool CSS */
-
+.my-component-scoped .text-yellow-500 {
+    --tw-text-opacity: 1;
+    color: rgb(234 179 8 / var(--tw-text-opacity))
+}
+.my-component-scoped .hover\:text-green-400:hover {
+    --tw-text-opacity: 1;
+    color: rgb(74 222 128 / var(--tw-text-opacity))
+}
