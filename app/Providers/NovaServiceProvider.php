@@ -2,9 +2,16 @@
 
 namespace App\Providers;
 
+use App\Nova\BookedData;
+use App\Nova\Dashboards\Main;
+use App\Nova\User;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Report\Report\Report;
+use Illuminate\Http\Request;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -16,6 +23,28 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Nova::mainMenu(function (Request $request) {
+            return [
+
+
+
+                MenuSection::dashboard(Main::class),
+
+                MenuSection::make('Resources', [
+                    MenuItem::resource(User::class),
+                    MenuItem::resource(BookedData::class),
+                ])->icon('document-text')->collapsable(),
+
+
+                MenuSection::make('Report', [
+                    MenuItem::make('Report', '/report'),
+                    MenuItem::make('Live Reporting', '/live-report'),
+                ])->icon('chart-bar')->collapsable(),
+
+              
+            ];
+        });
     }
 
     /**
@@ -26,9 +55,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**
@@ -66,7 +95,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            new Report,
+        ];
     }
 
     /**

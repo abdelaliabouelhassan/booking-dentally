@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::any('/{any}', function () {
-    return view('MainApp');
-})->where('any', '.*');
+
+Route::get('/{any}', function () {
+    return view('mainapp');
+})->where('any', '^(?!admin).*$');
+
+
+
 
