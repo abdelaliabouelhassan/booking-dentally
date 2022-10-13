@@ -132,7 +132,10 @@
           </div>
         </div>
       </div>
+        <div class=" w-full">
+            <apexchart class=" w-full " type="bar" :options="options" :series="series"></apexchart>
 
+        </div>
       <div class="w-full flex flex-col items-start space-y-8">
         <div class="flex items-start space-x-10">
           <div class="flex flex-col items-start space-y-2">
@@ -445,6 +448,22 @@
 import { onMounted, onBeforeUnmount, ref } from "vue";
 
 export default {
+  data: function() {
+    return {
+      options: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+        }
+      },
+      series: [{
+        name: 'series-1',
+        data: [30, 40, 45, 50, 49, 60, 70, 91]
+      }]
+    }
+  },
   setup() {
     const observer = ref(null);
     const dark = ref(false);
