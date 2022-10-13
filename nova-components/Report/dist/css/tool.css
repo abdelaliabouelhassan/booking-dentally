@@ -1,9 +1,1186 @@
 /* Nova Tool CSS */
-.my-component-scoped .text-yellow-500 {
-    --tw-text-opacity: 1;
-    color: rgb(234 179 8 / var(--tw-text-opacity))
+.my-component-scoped .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0
 }
-.my-component-scoped .hover\:text-green-400:hover {
+.my-component-scoped .relative {
+    position: relative
+}
+.my-component-scoped .-my-2 {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem
+}
+.my-component-scoped .-mx-4 {
+    margin-left: -1rem;
+    margin-right: -1rem
+}
+.my-component-scoped .-my-2 {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem
+}
+.my-component-scoped .-mx-4 {
+    margin-left: -1rem;
+    margin-right: -1rem
+}
+.my-component-scoped .-my-2 {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem
+}
+.my-component-scoped .-mx-4 {
+    margin-left: -1rem;
+    margin-right: -1rem
+}
+.my-component-scoped .-my-2 {
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem
+}
+.my-component-scoped .-mx-4 {
+    margin-left: -1rem;
+    margin-right: -1rem
+}
+.my-component-scoped .mt-8 {
+    margin-top: 2rem
+}
+.my-component-scoped .ml-2 {
+    margin-left: 0.5rem
+}
+.my-component-scoped .ml-auto {
+    margin-left: auto
+}
+.my-component-scoped .inline-block {
+    display: inline-block
+}
+.my-component-scoped .flex {
+    display: flex
+}
+.my-component-scoped .inline-flex {
+    display: inline-flex
+}
+.my-component-scoped .table {
+    display: table
+}
+.my-component-scoped .hidden {
+    display: none
+}
+.my-component-scoped .h-4 {
+    height: 1rem
+}
+.my-component-scoped .h-10 {
+    height: 2.5rem
+}
+.my-component-scoped .h-6 {
+    height: 1.5rem
+}
+.my-component-scoped .h-4 {
+    height: 1rem
+}
+.my-component-scoped .h-10 {
+    height: 2.5rem
+}
+.my-component-scoped .h-6 {
+    height: 1.5rem
+}
+.my-component-scoped .h-4 {
+    height: 1rem
+}
+.my-component-scoped .h-10 {
+    height: 2.5rem
+}
+.my-component-scoped .h-6 {
+    height: 1.5rem
+}
+.my-component-scoped .h-4 {
+    height: 1rem
+}
+.my-component-scoped .h-10 {
+    height: 2.5rem
+}
+.my-component-scoped .h-6 {
+    height: 1.5rem
+}
+.my-component-scoped .h-4 {
+    height: 1rem
+}
+.my-component-scoped .h-10 {
+    height: 2.5rem
+}
+.my-component-scoped .h-6 {
+    height: 1.5rem
+}
+.my-component-scoped .h-9 {
+    height: 2.25rem
+}
+.my-component-scoped .w-full {
+    width: 100%
+}
+.my-component-scoped .w-4 {
+    width: 1rem
+}
+.my-component-scoped .w-6 {
+    width: 1.5rem
+}
+.my-component-scoped .w-full {
+    width: 100%
+}
+.my-component-scoped .w-4 {
+    width: 1rem
+}
+.my-component-scoped .w-6 {
+    width: 1.5rem
+}
+.my-component-scoped .w-full {
+    width: 100%
+}
+.my-component-scoped .w-4 {
+    width: 1rem
+}
+.my-component-scoped .w-6 {
+    width: 1.5rem
+}
+.my-component-scoped .w-full {
+    width: 100%
+}
+.my-component-scoped .w-4 {
+    width: 1rem
+}
+.my-component-scoped .w-6 {
+    width: 1.5rem
+}
+.my-component-scoped .w-full {
+    width: 100%
+}
+.my-component-scoped .w-4 {
+    width: 1rem
+}
+.my-component-scoped .w-6 {
+    width: 1.5rem
+}
+.my-component-scoped .min-w-full {
+    min-width: 100%
+}
+.my-component-scoped .flex-1 {
+    flex: 1 1 0%
+}
+.my-component-scoped .flex-shrink-0 {
+    flex-shrink: 0
+}
+.my-component-scoped .cursor-pointer {
+    cursor: pointer
+}
+.my-component-scoped .select-none {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none
+}
+.my-component-scoped .flex-col {
+    flex-direction: column
+}
+.my-component-scoped .items-start {
+    align-items: flex-start
+}
+.my-component-scoped .items-center {
+    align-items: center
+}
+.my-component-scoped .justify-end {
+    justify-content: flex-end
+}
+.my-component-scoped .justify-center {
+    justify-content: center
+}
+.my-component-scoped .justify-between {
+    justify-content: space-between
+}
+.my-component-scoped .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.25rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-14 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(3.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+}
+.my-component-scoped .space-x-0 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0px * var(--tw-space-x-reverse));
+    margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)))
+}
+.my-component-scoped .divide-y > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-y-reverse: 0;
+    border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
+}
+.my-component-scoped .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-divide-opacity))
+}
+.my-component-scoped .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    --tw-divide-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-divide-opacity))
+}
+.my-component-scoped .overflow-hidden {
+    overflow: hidden
+}
+.my-component-scoped .overflow-x-auto {
+    overflow-x: auto
+}
+.my-component-scoped .whitespace-nowrap {
+    white-space: nowrap
+}
+.my-component-scoped .rounded-2xl {
+    border-radius: 1rem
+}
+.my-component-scoped .rounded-lg {
+    border-radius: 0.5rem
+}
+.my-component-scoped .rounded {
+    border-radius: 0.25rem
+}
+.my-component-scoped .rounded-full {
+    border-radius: 9999px
+}
+.my-component-scoped .rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
+}
+.my-component-scoped .rounded-r-2xl {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem
+}
+.my-component-scoped .rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
+}
+.my-component-scoped .rounded-r-2xl {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem
+}
+.my-component-scoped .rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
+}
+.my-component-scoped .rounded-r-2xl {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem
+}
+.my-component-scoped .rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
+}
+.my-component-scoped .rounded-r-2xl {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem
+}
+.my-component-scoped .rounded-l-2xl {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem
+}
+.my-component-scoped .rounded-r-2xl {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem
+}
+.my-component-scoped .rounded-b-lg {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem
+}
+.my-component-scoped .rounded-bl-lg {
+    border-bottom-left-radius: 0.5rem
+}
+.my-component-scoped .rounded-br-lg {
+    border-bottom-right-radius: 0.5rem
+}
+.my-component-scoped .border-b {
+    border-bottom-width: 1px
+}
+.my-component-scoped .border-t {
+    border-top-width: 1px
+}
+.my-component-scoped .border-gray-200 {
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+.my-component-scoped .border-gray-100 {
+    --tw-border-opacity: 1;
+    border-color: rgb(243 244 246 / var(--tw-border-opacity))
+}
+.my-component-scoped .bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.my-component-scoped .bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-scoped .fill-current {
+    fill: currentColor
+}
+.my-component-scoped .fill-gray-300 {
+    fill: #d1d5db
+}
+.my-component-scoped .p-2 {
+    padding: 0.5rem
+}
+.my-component-scoped .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-scoped .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+}
+.my-component-scoped .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.my-component-scoped .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
+}
+.my-component-scoped .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
+}
+.my-component-scoped .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem
+}
+.my-component-scoped .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+.my-component-scoped .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-scoped .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+}
+.my-component-scoped .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.my-component-scoped .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
+}
+.my-component-scoped .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
+}
+.my-component-scoped .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem
+}
+.my-component-scoped .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+.my-component-scoped .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-scoped .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+}
+.my-component-scoped .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.my-component-scoped .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
+}
+.my-component-scoped .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
+}
+.my-component-scoped .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem
+}
+.my-component-scoped .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+.my-component-scoped .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-scoped .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+}
+.my-component-scoped .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.my-component-scoped .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
+}
+.my-component-scoped .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
+}
+.my-component-scoped .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem
+}
+.my-component-scoped .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+.my-component-scoped .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+.my-component-scoped .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem
+}
+.my-component-scoped .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem
+}
+.my-component-scoped .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem
+}
+.my-component-scoped .py-0\.5 {
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem
+}
+.my-component-scoped .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem
+}
+.my-component-scoped .py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px
+}
+.my-component-scoped .pl-4 {
+    padding-left: 1rem
+}
+.my-component-scoped .pr-3 {
+    padding-right: 0.75rem
+}
+.my-component-scoped .pl-3 {
+    padding-left: 0.75rem
+}
+.my-component-scoped .pr-4 {
+    padding-right: 1rem
+}
+.my-component-scoped .pl-4 {
+    padding-left: 1rem
+}
+.my-component-scoped .pr-3 {
+    padding-right: 0.75rem
+}
+.my-component-scoped .pl-3 {
+    padding-left: 0.75rem
+}
+.my-component-scoped .pr-4 {
+    padding-right: 1rem
+}
+.my-component-scoped .pl-4 {
+    padding-left: 1rem
+}
+.my-component-scoped .pr-3 {
+    padding-right: 0.75rem
+}
+.my-component-scoped .pl-3 {
+    padding-left: 0.75rem
+}
+.my-component-scoped .pr-4 {
+    padding-right: 1rem
+}
+.my-component-scoped .pl-4 {
+    padding-left: 1rem
+}
+.my-component-scoped .pr-3 {
+    padding-right: 0.75rem
+}
+.my-component-scoped .pl-3 {
+    padding-left: 0.75rem
+}
+.my-component-scoped .pr-4 {
+    padding-right: 1rem
+}
+.my-component-scoped .pr-2 {
+    padding-right: 0.5rem
+}
+.my-component-scoped .pl-5 {
+    padding-left: 1.25rem
+}
+.my-component-scoped .pr-5 {
+    padding-right: 1.25rem
+}
+.my-component-scoped .text-left {
+    text-align: left
+}
+.my-component-scoped .text-center {
+    text-align: center
+}
+.my-component-scoped .text-right {
+    text-align: right
+}
+.my-component-scoped .align-middle {
+    vertical-align: middle
+}
+.my-component-scoped .font-sans {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+.my-component-scoped .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+.my-component-scoped .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem
+}
+.my-component-scoped .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+.my-component-scoped .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
+.my-component-scoped .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+.my-component-scoped .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem
+}
+.my-component-scoped .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+.my-component-scoped .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
+.my-component-scoped .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+.my-component-scoped .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem
+}
+.my-component-scoped .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+.my-component-scoped .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
+.my-component-scoped .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+.my-component-scoped .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem
+}
+.my-component-scoped .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+.my-component-scoped .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem
+}
+.my-component-scoped .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem
+}
+.my-component-scoped .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem
+}
+.my-component-scoped .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem
+}
+.my-component-scoped .font-medium {
+    font-weight: 500
+}
+.my-component-scoped .font-normal {
+    font-weight: 400
+}
+.my-component-scoped .font-semibold {
+    font-weight: 600
+}
+.my-component-scoped .font-medium {
+    font-weight: 500
+}
+.my-component-scoped .font-normal {
+    font-weight: 400
+}
+.my-component-scoped .font-semibold {
+    font-weight: 600
+}
+.my-component-scoped .font-medium {
+    font-weight: 500
+}
+.my-component-scoped .font-normal {
+    font-weight: 400
+}
+.my-component-scoped .font-semibold {
+    font-weight: 600
+}
+.my-component-scoped .font-medium {
+    font-weight: 500
+}
+.my-component-scoped .font-normal {
+    font-weight: 400
+}
+.my-component-scoped .font-semibold {
+    font-weight: 600
+}
+.my-component-scoped .font-medium {
+    font-weight: 500
+}
+.my-component-scoped .font-normal {
+    font-weight: 400
+}
+.my-component-scoped .font-semibold {
+    font-weight: 600
+}
+.my-component-scoped .font-bold {
+    font-weight: 700
+}
+.my-component-scoped .uppercase {
+    text-transform: uppercase
+}
+.my-component-scoped .capitalize {
+    text-transform: capitalize
+}
+.my-component-scoped .tracking-wide {
+    letter-spacing: 0.025em
+}
+.my-component-scoped .text-blue-400 {
     --tw-text-opacity: 1;
-    color: rgb(74 222 128 / var(--tw-text-opacity))
+    color: rgb(96 165 250 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-indigo-600 {
+    --tw-text-opacity: 1;
+    color: rgb(79 70 229 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-indigo-600 {
+    --tw-text-opacity: 1;
+    color: rgb(79 70 229 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-indigo-600 {
+    --tw-text-opacity: 1;
+    color: rgb(79 70 229 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-indigo-600 {
+    --tw-text-opacity: 1;
+    color: rgb(79 70 229 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-500 {
+    --tw-text-opacity: 1;
+    color: rgb(107 114 128 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity))
+}
+.my-component-scoped .text-gray-300 {
+    --tw-text-opacity: 1;
+    color: rgb(209 213 219 / var(--tw-text-opacity))
+}
+.my-component-scoped .shadow {
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+.my-component-scoped .ring-1 {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.my-component-scoped .ring-black {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(0 0 0 / var(--tw-ring-opacity))
+}
+.my-component-scoped .ring-opacity-5 {
+    --tw-ring-opacity: 0.05
+}
+.my-component-scoped .hover\:bg-gray-600:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity))
+}
+.my-component-scoped .hover\:bg-gray-100:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(243 244 246 / var(--tw-bg-opacity))
+}
+.my-component-scoped .hover\:bg-opacity-60:hover {
+    --tw-bg-opacity: 0.6
+}
+.my-component-scoped .hover\:text-indigo-900:hover {
+    --tw-text-opacity: 1;
+    color: rgb(49 46 129 / var(--tw-text-opacity))
+}
+.my-component-scoped .hover\:text-opacity-80:hover {
+    --tw-text-opacity: 0.8
+}
+.my-component-scoped .focus\:outline-none:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px
+}
+.my-component-scoped .focus\:ring:focus {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.my-component-scoped .focus\:ring-inset:focus {
+    --tw-ring-inset: inset
+}
+.my-component-scoped .active\:outline-none:active {
+    outline: 2px solid transparent;
+    outline-offset: 2px
+}
+.my-component-scoped .active\:ring:active {
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+}
+.my-component-scoped .group:hover .group-hover\:bg-gray-50 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+}
+.my-component-scoped .dark .dark\:border-gray-700 {
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity))
+}
+.my-component-scoped .dark .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity))
+}
+.my-component-scoped .dark .dark\:bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity))
+}
+.my-component-scoped .dark .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity))
+}
+.my-component-scoped .dark .dark\:fill-gray-500 {
+    fill: #6b7280
+}
+.my-component-scoped .dark .dark\:text-red-400 {
+    --tw-text-opacity: 1;
+    color: rgb(248 113 113 / var(--tw-text-opacity))
+}
+.my-component-scoped .dark .dark\:text-gray-300 {
+    --tw-text-opacity: 1;
+    color: rgb(209 213 219 / var(--tw-text-opacity))
+}
+.my-component-scoped .dark .dark\:text-gray-600 {
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99 / var(--tw-text-opacity))
+}
+.my-component-scoped .dark .dark\:ring-gray-600 {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity))
+}
+.my-component-scoped .dark .dark\:hover\:bg-gray-700:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity))
+}
+.my-component-scoped .dark .dark\:focus\:ring-gray-600:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity))
+}
+.my-component-scoped .dark .group:hover .dark\:group-hover\:bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity))
+}
+@media (min-width: 640px) {
+    .my-component-scoped .sm\:-mx-6 {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem
+    }
+    .my-component-scoped .sm\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem
+    }
+    .my-component-scoped .sm\:pl-6 {
+        padding-left: 1.5rem
+    }
+    .my-component-scoped .sm\:pr-6 {
+        padding-right: 1.5rem
+    }
+    .my-component-scoped .sm\:pl-6 {
+        padding-left: 1.5rem
+    }
+    .my-component-scoped .sm\:pr-6 {
+        padding-right: 1.5rem
+    }
+    .my-component-scoped .sm\:pl-6 {
+        padding-left: 1.5rem
+    }
+    .my-component-scoped .sm\:pr-6 {
+        padding-right: 1.5rem
+    }
+    .my-component-scoped .sm\:pl-6 {
+        padding-left: 1.5rem
+    }
+    .my-component-scoped .sm\:pr-6 {
+        padding-right: 1.5rem
+    }
+}
+@media (min-width: 768px) {
+    .my-component-scoped .md\:ml-3 {
+        margin-left: 0.75rem
+    }
+    .my-component-scoped .md\:flex {
+        display: flex
+    }
+    .my-component-scoped .md\:flex-row {
+        flex-direction: row
+    }
+    .my-component-scoped .md\:items-center {
+        align-items: center
+    }
+    .my-component-scoped .md\:rounded-lg {
+        border-radius: 0.5rem
+    }
+    .my-component-scoped .md\:px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem
+    }
+    .my-component-scoped .md\:pr-3 {
+        padding-right: 0.75rem
+    }
+}
+@media (min-width: 1024px) {
+    .my-component-scoped .lg\:-mx-8 {
+        margin-left: -2rem;
+        margin-right: -2rem
+    }
+    .my-component-scoped .lg\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem
+    }
 }
