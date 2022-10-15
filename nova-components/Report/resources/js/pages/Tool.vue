@@ -422,7 +422,7 @@
                           py-2
                         "
                       >
-                        <span>Avatar</span>
+                        <span>patient image</span>
                       </th>
                       <th
                         class="
@@ -458,7 +458,7 @@
                               tracking-wide
                               text-gray-500
                             "
-                            >Name</span
+                            >patient name</span
                           >
                         </button>
                       </th>
@@ -496,14 +496,52 @@
                               tracking-wide
                               text-gray-500
                             "
-                            >Email</span
+                            >appointment date</span
+                          >
+                        </button>
+                      </th>
+                       <th
+                        class="
+                          text-left
+                          px-2
+                          whitespace-nowrap
+                          uppercase
+                          text-gray-500 text-xxs
+                          tracking-wide
+                          py-2
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="
+                            cursor-pointer
+                            inline-flex
+                            items-center
+                            focus:outline-none focus:ring
+                            ring-primary-200
+                            dark:ring-gray-600
+                            rounded
+                          "
+                          dusk="sort-email"
+                          aria-sort="none"
+                        >
+                          <span
+                            class="
+                              inline-flex
+                              font-sans font-bold
+                              uppercase
+                              text-xxs
+                              tracking-wide
+                              text-gray-500
+                            "
+                            >booking date</span
                           >
                         </button>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr dusk="1-row" class="group">
+                    <tr dusk="1-row" class="group" v-for="(item,index) in appointments" :key="index" >
                       <td
                         class="
                           px-2
@@ -535,8 +573,8 @@
                         <div class="text-left">
                           <a
                             class="link-default"
-                            href="/admin/resources/users/1"
-                            >1</a
+                            href="javascript:void(0)"
+                            >{{item.id}}</a
                           >
                         </div>
                       </td>
@@ -558,7 +596,7 @@
                           resource="[object Object]"
                         >
                           <img
-                            src="https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300"
+                            :src="item.patient_image_url ? item.patient_image_url :  'https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300'"
                             class="inline-block rounded-full"
                             draggable="false"
                             style="max-width: 30px"
@@ -580,7 +618,7 @@
                       >
                         <div class="text-left" resource="[object Object]">
                           <span class="text-90 whitespace-nowrap"
-                            >abdelali</span
+                            >{{item.patient_name ? item.patient_name : '.....'}}</span
                           >
                         </div>
                       </td>
@@ -599,7 +637,26 @@
                       >
                         <div class="text-left" resource="[object Object]">
                           <span class="text-90 whitespace-nowrap"
-                            >abdelali@boystack.com</span
+                            >{{item.start_time}}</span
+                          >
+                        </div>
+                      </td>
+                       <td
+                        class="
+                          px-2
+                          py-2
+                          border-t border-gray-100
+                          dark:border-gray-700
+                          whitespace-nowrap
+                          cursor-pointer
+                          dark:bg-gray-800
+                          group-hover:bg-gray-50
+                          dark:group-hover:bg-gray-900
+                        "
+                      >
+                        <div class="text-left" resource="[object Object]">
+                          <span class="text-90 whitespace-nowrap"
+                            >{{item.created_at}}</span
                           >
                         </div>
                       </td>
@@ -617,6 +674,10 @@
 
 <script>
 import { onMounted, onBeforeUnmount, ref } from "vue";
+import axios from "axios";
+axios.defaults.baseURL = 'https://api.dentally.co/v1/';
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + 'VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0'
+
 
 export default {
   data: function () {
@@ -643,6 +704,7 @@ export default {
   setup() {
     const observer = ref(null);
     const dark = ref(false);
+    const appointments = ref([]);
     onMounted(() => {
       dark.value = document.documentElement.classList.contains("dark");
 
@@ -660,6 +722,28 @@ export default {
       });
     });
 
+    const loadAppointments = async () => {
+      let on = null;
+      let before = null;
+      let after = null;
+      on = new Date();
+      //get this month appointments
+      on = on.toISOString().split("T")[0];
+      //get last month appointments
+      before = new Date();
+      before.setDate(before.getDate() );
+      before = before.toISOString().split("T")[0];
+      //get next month appointments
+      after = new Date();
+      after.setDate(after.getDate() - 2 ); // play with this number to get the appointments you want
+      after = after.toISOString().split("T")[0];
+
+      const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
+      appointments.value = response.data.appointments;
+      console.log(response.data);
+    };
+    loadAppointments();
+
     onBeforeUnmount(() => {
       observer.value.disconnect();
       observer.value = null;
@@ -667,8 +751,10 @@ export default {
 
     return {
       dark,
+      appointments,
     };
   },
+ 
 };
 </script>
 
