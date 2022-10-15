@@ -305,6 +305,7 @@
       </div>
       <div class="w-full">
         <apexchart
+         v-if="show"
           class="w-full"
           type="bar"
           :options="options"
@@ -357,7 +358,7 @@
             <div class="relative">
               <!---->
               <div class="overflow-hidden overflow-x-auto relative">
-                <table class="w-full" data-testid="resource-table">
+                <table class="w-full" data-testid="resource-table" >
                   <thead class="bg-gray-50 dark:bg-gray-800">
                     <tr>
                       <th
@@ -682,20 +683,7 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + 'VgcjQR3YAVYWgI-1CT
 export default {
   data: function () {
     return {
-      options: {
-        chart: {
-          id: "vuechart-example",
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-        },
-      },
-      series: [
-        {
-          name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70, 91],
-        },
-      ],
+     
       showPractitioner:false,
       showReason:false,
       showDate:false
@@ -705,6 +693,24 @@ export default {
     const observer = ref(null);
     const dark = ref(false);
     const appointments = ref([]);
+    const options = ref({
+      chart: {
+        id: "vuechart-example",
+      },
+      xaxis: {
+        categories: [],
+      },
+    });
+    const series = ref([
+      {
+        name: "Appointments", 
+        data: [],
+      },
+    ]);
+    const show = ref(false);
+    const currentPage = ref(1);
+    const perPage = ref(100);
+
     onMounted(() => {
       dark.value = document.documentElement.classList.contains("dark");
 
@@ -722,7 +728,109 @@ export default {
       });
     });
 
+  
+
     const loadAppointments = async () => {
+      let on = null;
+      let before = null;
+      let after = null;
+      on = new Date();
+      //get this month appointments
+      on = on.toISOString().split("T")[0];
+      //get last month appointments
+      before = new Date();
+      before.setDate(before.getDate() );
+      before = before.toISOString().split("T")[0];
+      //get next month appointments
+      after = new Date();
+      after.setDate(after.getDate() - 6 ); // play with this number to get the appointments you want
+      after = after.toISOString().split("T")[0];
+
+      const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page="  + perPage.value + "&page=" + currentPage.value); 
+      appointments.value = appointments.value.concat(response.data.appointments);
+    if(response.data.meta.current_page < response.data.meta.total_pages){
+        currentPage.value = response.data.meta.current_page + 1;
+        loadAppointments();
+      }else{
+        let grouped = groupByMonth(appointments.value, "start_time");
+       // console.log(grouped);
+        console.log(appointments);
+        options.value.xaxis.categories = Object.keys(grouped);
+        //console.log(options.value.xaxis.categories);
+        series.value[0].data = Object.values(grouped).map((item) => item.length);
+        show.value = true;
+      }
+     
+   
+    };
+
+
+    const groupBy = (xs, key) => {
+      return xs.reduce((rv, x) => {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    const groupByDateOnly = (xs, key) => {
+      return xs.reduce((rv, x) => {
+        (rv[x[key].split("T")[0]] = rv[x[key].split("T")[0]] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+   const displayDayname = (date) => {
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var d = new Date(date);
+      var dayName = days[d.getDay()];
+      return dayName + "/"+ displayMonthAndDay(date);
+    };
+
+    const displayMonthAndDay = (date) => {
+      var d = new Date(date);
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      return month + "/" + day;
+    };
+
+    const groupByWeek = (xs, key) => {
+      return xs.reduce((rv, x) => {
+        (rv[displayDayname(x[key])] = rv[displayDayname(x[key])] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    const groupByMonth = (xs, key) => {
+      return xs.reduce((rv, x) => {
+        (rv[displayMonthAndDay(x[key])] = rv[displayMonthAndDay(x[key])] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    onMounted(() => {
+      loadAppointments();
+    });
+
+    onBeforeUnmount(() => {
+      observer.value.disconnect();
+    });
+
+    return {
+      dark,
+      appointments,
+      options,
+      series,
+      show,
+    };
+
+   const groupByWeekonly = (xs, key) => {
+      return xs.reduce((rv, x) => {
+        (rv[x[key].split("T")[0].split("-")[2]] = rv[x[key].split("T")[0].split("-")[2]] || []).push(x);
+        return rv;
+      }, {});
+    };
+
+    const loadChartData = async () => {
       let on = null;
       let before = null;
       let after = null;
@@ -741,7 +849,17 @@ export default {
       const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
       appointments.value = response.data.appointments;
       console.log(response.data);
+      const grouped = groupBy(response.data.appointments, "start_time");
+      console.log(grouped);
+      const chartData = [];
+      for (const [key, value] of Object.entries(grouped)) {
+        chartData.push({ x: key, y: value.length });
+      }
+      console.log(chartData);
+      this.chartData = chartData;
     };
+
+
     loadAppointments();
 
     onBeforeUnmount(() => {
@@ -752,6 +870,9 @@ export default {
     return {
       dark,
       appointments,
+      options,
+      series,
+      show
     };
   },
  
