@@ -8,8 +8,9 @@
         <div class="w-full flex justify-between items-center">
           <div class="flex items-center space-x-14">
             <span class="text-xl font-normal">Filter By </span>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4 relative">
               <div
+               @click="showReason = !showReason"
                 class="
                   p-2
                   bg-gray-500
@@ -34,6 +35,7 @@
                 </svg>
               </div>
               <span
+              @click="showReason = !showReason"
                 class="
                   text-xl
                   font-semibold
@@ -42,9 +44,80 @@
                 "
                 >Reason</span
               >
+               <div v-if="showReason"
+                class="
+                  p-5
+                  rounded-2xl
+                  absolute
+                  shadow-md
+                  bg-white
+                  dark:bg-gray-800
+                  w-[400px]
+                  space-y-8 z-30 top-10
+                "
+              >
+                <div class="w-full flex items-center justify-between">
+                  <span
+                    class="
+                      font-medium
+                      text-2xl text-gray-900
+                      dark:text-gray-100
+                    "
+                    >Reasons</span
+                  >
+                  <div class="flex items-center space-x-4">
+                    <span
+                      class="
+                        text-blue-500
+                        font-medium
+                        text-base
+                        cursor-pointer
+                        hover:text-opacity-70
+                      "
+                      >All</span
+                    >
+                    <span
+                      class="
+                        text-blue-500
+                        font-medium
+                        text-base
+                        cursor-pointer
+                        hover:text-opacity-70
+                      "
+                      >Clear</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex flex-col items-start space-y-4">
+                  <div class="flex items-center space-x-4" v-for=" n in 10" :key="n">
+                    <input
+                      :id="n"
+                      type="checkbox"
+                      value=""
+                      class="
+                        w-5
+                        h-5
+                        text-blue-600
+                        bg-gray-100
+                        rounded
+                        border-gray-300
+                        focus:ring-blue-500
+                        dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                        focus:ring-2
+                        dark:bg-gray-700 dark:border-gray-600
+                      "
+                    />
+                    <label :for="n" class="text-xl font-semibold"
+                      >Reason title</label
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4 relative">
               <div
+               @click="showPractitioner = !showPractitioner"
                 class="
                   p-2
                   bg-gray-500
@@ -69,6 +142,7 @@
                 </svg>
               </div>
               <span
+               @click="showPractitioner = !showPractitioner"
                 class="
                   text-xl
                   font-semibold
@@ -77,10 +151,81 @@
                 "
                 >Practitioner</span
               >
+
+              <div v-if="showPractitioner"
+                class="
+                  p-5
+                  rounded-2xl
+                  absolute
+                  shadow-md
+                  bg-white
+                  dark:bg-gray-800
+                  w-[400px]
+                  space-y-8 z-30 top-10
+                "
+              >
+                <div class="w-full flex items-center justify-between">
+                  <span
+                    class="
+                      font-medium
+                      text-2xl text-gray-900
+                      dark:text-gray-100
+                    "
+                    >Practitioner Member</span
+                  >
+                  <div class="flex items-center space-x-4">
+                    <span
+                      class="
+                        text-blue-500
+                        font-medium
+                        text-base
+                        cursor-pointer
+                        hover:text-opacity-70
+                      "
+                      >All</span
+                    >
+                    <span
+                      class="
+                        text-blue-500
+                        font-medium
+                        text-base
+                        cursor-pointer
+                        hover:text-opacity-70
+                      "
+                      >Clear</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex flex-col items-start space-y-4">
+                  <div class="flex items-center space-x-4" v-for=" n in 10" :key="n">
+                    <input
+                      :id="n"
+                      type="checkbox"
+                      value=""
+                      class="
+                        w-5
+                        h-5
+                        text-blue-600
+                        bg-gray-100
+                        rounded
+                        border-gray-300
+                        focus:ring-blue-500
+                        dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                        focus:ring-2
+                        dark:bg-gray-700 dark:border-gray-600
+                      "
+                    />
+                    <label :for="n" class="text-xl font-semibold"
+                      >Staff Member name</label
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="flex items-center">
+          <div class="flex items-center relative">
             <button
               class="h-10 px-2 bg-gray-500 rounded-l-2xl hover:bg-opacity-60"
             >
@@ -100,6 +245,7 @@
               </svg>
             </button>
             <button
+             @click="showDate = !showDate"
               class="
                 h-10
                 px-8
@@ -129,13 +275,42 @@
                 />
               </svg>
             </button>
+             <div v-if="showDate"
+                class="
+                  p-5
+                  rounded-2xl
+                  absolute
+                  shadow-md
+                  bg-white
+                  dark:bg-gray-800
+                  w-[200px]
+                  space-y-8 z-30 top-12 right-10
+                "
+              >
+              
+
+                <div class="flex flex-col items-start space-y-4 w-full">
+                  <div class="flex items-center space-x-4 w-full" v-for=" n in 10" :key="n">
+                   
+                  <div class=" w-full py-2 text-center flex dark:hover:bg-gray-600 hover:bg-gray-800 group  rounded-xl cursor-pointer">
+                      <span :for="n" class="text-xl dark:text-white  text-center font-semibold m-auto group-hover:text-white"
+                      >Reason title</span
+                    >
+                  </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
-        <div class=" w-full">
-            <apexchart class=" w-full " type="bar" :options="options" :series="series"></apexchart>
-
-        </div>
+      <div class="w-full">
+        <apexchart
+          class="w-full"
+          type="bar"
+          :options="options"
+          :series="series"
+        ></apexchart>
+      </div>
       <div class="w-full flex flex-col items-start space-y-8">
         <div class="flex items-start space-x-10">
           <div class="flex flex-col items-start space-y-2">
@@ -177,7 +352,6 @@
                 dark:border-gray-700
               "
             >
-            
               <!---->
             </div>
             <div class="relative">
@@ -186,7 +360,7 @@
                 <table class="w-full" data-testid="resource-table">
                   <thead class="bg-gray-50 dark:bg-gray-800">
                     <tr>
-                     <th
+                      <th
                         class="
                           text-left
                           px-2
@@ -197,7 +371,7 @@
                           py-2
                         "
                       >
-                        <span class=" hidden">Resource</span>
+                        <span class="hidden">Resource</span>
                       </th>
                       <th
                         class="
@@ -326,12 +500,11 @@
                           >
                         </button>
                       </th>
-                      
                     </tr>
                   </thead>
                   <tbody>
                     <tr dusk="1-row" class="group">
-                       <td
+                      <td
                         class="
                           px-2
                           py-2
@@ -344,7 +517,7 @@
                           dark:group-hover:bg-gray-900
                         "
                       >
-                        <span class=" hidden">Resource</span>
+                        <span class="hidden">Resource</span>
                       </td>
                       <td
                         class="
@@ -430,12 +603,10 @@
                           >
                         </div>
                       </td>
-                      
                     </tr>
                   </tbody>
                 </table>
               </div>
-             
             </div>
           </div>
         </div>
@@ -448,21 +619,26 @@
 import { onMounted, onBeforeUnmount, ref } from "vue";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       options: {
         chart: {
-          id: 'vuechart-example'
+          id: "vuechart-example",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
       },
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }]
-    }
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 45, 50, 49, 60, 70, 91],
+        },
+      ],
+      showPractitioner:false,
+      showReason:false,
+      showDate:false
+    };
   },
   setup() {
     const observer = ref(null);

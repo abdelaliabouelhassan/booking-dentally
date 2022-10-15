@@ -46,16 +46,19 @@ __webpack_require__.r(__webpack_exports__);
     return {
       options: {
         chart: {
-          id: 'vuechart-example'
+          id: "vuechart-example"
         },
         xaxis: {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
         }
       },
       series: [{
-        name: 'series-1',
+        name: "series-1",
         data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }]
+      }],
+      showPractitioner: false,
+      showReason: false,
+      showDate: false
     };
   },
   setup: function setup() {
@@ -110,11 +113,113 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "font-medium text-2xl text-gray-900 dark:text-gray-300"
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full flex justify-between items-center\"><div class=\"flex items-center space-x-14\"><span class=\"text-xl font-normal\">Filter By </span><div class=\"flex items-center space-x-4\"><div class=\"p-2 bg-gray-500 rounded-2xl cursor-pointer hover:bg-gray-600\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-4 h-4 text-white\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z\"></path></svg></div><span class=\"text-xl font-semibold cursor-pointer hover:text-opacity-80\">Reason</span></div><div class=\"flex items-center space-x-4\"><div class=\"p-2 bg-gray-500 rounded-2xl cursor-pointer hover:bg-gray-600\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-4 h-4 text-white\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z\"></path></svg></div><span class=\"text-xl font-semibold cursor-pointer hover:text-opacity-80\">Practitioner</span></div></div><div class=\"flex items-center\"><button class=\"h-10 px-2 bg-gray-500 rounded-l-2xl hover:bg-opacity-60\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6 text-white\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15.75 19.5L8.25 12l7.5-7.5\"></path></svg></button><button class=\"h-10 px-8 bg-gray-600 text-white text-xl font-medium hover:bg-opacity-60\"> This Month </button><button class=\"h-10 px-2 bg-gray-500 rounded-r-2xl hover:bg-opacity-60\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6 text-white\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M8.25 4.5l7.5 7.5-7.5 7.5\"></path></svg></button></div></div>", 1);
+var _hoisted_4 = {
+  "class": "w-full flex justify-between items-center"
+};
 var _hoisted_5 = {
+  "class": "flex items-center space-x-14"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-xl font-normal"
+}, "Filter By ", -1 /* HOISTED */);
+var _hoisted_7 = {
+  "class": "flex items-center space-x-4 relative"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-4 h-4 text-white"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+})], -1 /* HOISTED */);
+var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = {
+  key: 0,
+  "class": "p-5 rounded-2xl absolute shadow-md bg-white dark:bg-gray-800 w-[400px] space-y-8 z-30 top-10"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full flex items-center justify-between\"><span class=\"font-medium text-2xl text-gray-900 dark:text-gray-100\">Reasons</span><div class=\"flex items-center space-x-4\"><span class=\"text-blue-500 font-medium text-base cursor-pointer hover:text-opacity-70\">All</span><span class=\"text-blue-500 font-medium text-base cursor-pointer hover:text-opacity-70\">Clear</span></div></div>", 1);
+var _hoisted_12 = {
+  "class": "flex flex-col items-start space-y-4"
+};
+var _hoisted_13 = ["id"];
+var _hoisted_14 = ["for"];
+var _hoisted_15 = {
+  "class": "flex items-center space-x-4 relative"
+};
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-4 h-4 text-white"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+})], -1 /* HOISTED */);
+var _hoisted_17 = [_hoisted_16];
+var _hoisted_18 = {
+  key: 0,
+  "class": "p-5 rounded-2xl absolute shadow-md bg-white dark:bg-gray-800 w-[400px] space-y-8 z-30 top-10"
+};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full flex items-center justify-between\"><span class=\"font-medium text-2xl text-gray-900 dark:text-gray-100\">Practitioner Member</span><div class=\"flex items-center space-x-4\"><span class=\"text-blue-500 font-medium text-base cursor-pointer hover:text-opacity-70\">All</span><span class=\"text-blue-500 font-medium text-base cursor-pointer hover:text-opacity-70\">Clear</span></div></div>", 1);
+var _hoisted_20 = {
+  "class": "flex flex-col items-start space-y-4"
+};
+var _hoisted_21 = ["id"];
+var _hoisted_22 = ["for"];
+var _hoisted_23 = {
+  "class": "flex items-center relative"
+};
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "h-10 px-2 bg-gray-500 rounded-l-2xl hover:bg-opacity-60"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-6 h-6 text-white"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M15.75 19.5L8.25 12l7.5-7.5"
+})])], -1 /* HOISTED */);
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "h-10 px-2 bg-gray-500 rounded-r-2xl hover:bg-opacity-60"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-6 h-6 text-white"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M8.25 4.5l7.5 7.5-7.5 7.5"
+})])], -1 /* HOISTED */);
+var _hoisted_26 = {
+  key: 0,
+  "class": "p-5 rounded-2xl absolute shadow-md bg-white dark:bg-gray-800 w-[200px] space-y-8 z-30 top-12 right-10"
+};
+var _hoisted_27 = {
+  "class": "flex flex-col items-start space-y-4 w-full"
+};
+var _hoisted_28 = {
+  "class": "w-full py-2 text-center flex dark:hover:bg-gray-600 hover:bg-gray-800 group rounded-xl cursor-pointer"
+};
+var _hoisted_29 = ["for"];
+var _hoisted_30 = {
   "class": "w-full"
 };
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "w-full flex flex-col items-start space-y-8"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex items-start space-x-10"
@@ -226,12 +331,71 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full space-y-14", {
       dark: $setup.dark
     }])
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, "Report Generator " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.dark), 1 /* TEXT */), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, "Report Generator " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.dark), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return _ctx.showReason = !_ctx.showReason;
+    }),
+    "class": "p-2 bg-gray-500 rounded-2xl cursor-pointer hover:bg-gray-600"
+  }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.showReason = !_ctx.showReason;
+    }),
+    "class": "text-xl font-semibold cursor-pointer hover:text-opacity-80"
+  }, "Reason"), _ctx.showReason ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (n) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      "class": "flex items-center space-x-4",
+      key: n
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      id: n,
+      type: "checkbox",
+      value: "",
+      "class": "w-5 h-5 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+    }, null, 8 /* PROPS */, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      "for": n,
+      "class": "text-xl font-semibold"
+    }, "Reason title", 8 /* PROPS */, _hoisted_14)]);
+  }), 64 /* STABLE_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.showPractitioner = !_ctx.showPractitioner;
+    }),
+    "class": "p-2 bg-gray-500 rounded-2xl cursor-pointer hover:bg-gray-600"
+  }, _hoisted_17), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.showPractitioner = !_ctx.showPractitioner;
+    }),
+    "class": "text-xl font-semibold cursor-pointer hover:text-opacity-80"
+  }, "Practitioner"), _ctx.showPractitioner ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (n) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      "class": "flex items-center space-x-4",
+      key: n
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      id: n,
+      type: "checkbox",
+      value: "",
+      "class": "w-5 h-5 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+    }, null, 8 /* PROPS */, _hoisted_21), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+      "for": n,
+      "class": "text-xl font-semibold"
+    }, "Staff Member name", 8 /* PROPS */, _hoisted_22)]);
+  }), 64 /* STABLE_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.showDate = !_ctx.showDate;
+    }),
+    "class": "h-10 px-8 bg-gray-600 text-white text-xl font-medium hover:bg-opacity-60"
+  }, " This Month "), _hoisted_25, _ctx.showDate ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(10, function (n) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      "class": "flex items-center space-x-4 w-full",
+      key: n
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      "for": n,
+      "class": "text-xl dark:text-white text-center font-semibold m-auto group-hover:text-white"
+    }, "Reason title", 8 /* PROPS */, _hoisted_29)])]);
+  }), 64 /* STABLE_FRAGMENT */))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
     "class": "w-full",
     type: "bar",
     options: _ctx.options,
     series: _ctx.series
-  }, null, 8 /* PROPS */, ["options", "series"])]), _hoisted_6], 2 /* CLASS */)]);
+  }, null, 8 /* PROPS */, ["options", "series"])]), _hoisted_31], 2 /* CLASS */)]);
 }
 
 /***/ }),
