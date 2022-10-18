@@ -227,6 +227,7 @@
 
           <div class="flex items-center relative">
             <button
+             @click="SelectNextPeriode"
               class="h-10 px-2 bg-gray-500 rounded-l-2xl hover:bg-opacity-60"
             >
               <svg
@@ -245,6 +246,7 @@
               </svg>
             </button>
             <button
+            
              @click="showDate = !showDate"
               class="
                 h-10
@@ -258,6 +260,7 @@
               This Month
             </button>
             <button
+             @click="SelectPrevPeriode"
               class="h-10 px-2 bg-gray-500 rounded-r-2xl hover:bg-opacity-60"
             >
               <svg
@@ -290,11 +293,11 @@
               
 
                 <div class="flex flex-col items-start space-y-4 w-full">
-                  <div class="flex items-center space-x-4 w-full" v-for=" n in 10" :key="n">
+                  <div class="flex items-center space-x-4 w-full" v-for=" (item,index) in FilterPeriode" :key="index">
                    
-                  <div class=" w-full py-2 text-center flex dark:hover:bg-gray-600 hover:bg-gray-800 group  rounded-xl cursor-pointer">
-                      <span :for="n" class="text-xl dark:text-white  text-center font-semibold m-auto group-hover:text-white"
-                      >Reason title</span
+                  <div @click="SelectPeriode(item)" :class="{'dark:bg-gray-600 bg-gray-800':item.active}" class=" w-full py-2 text-center flex dark:hover:bg-gray-600 hover:bg-gray-800 group  rounded-xl cursor-pointer">
+                      <span  class="text-xl dark:text-white  text-center font-semibold m-auto group-hover:text-white"
+                      >{{item.name}}</span
                     >
                   </div>
                   </div>
@@ -305,8 +308,9 @@
       </div>
       <div class="w-full">
         <apexchart
+         
          v-if="show"
-          class="w-full"
+          class="w-full"  height="600"
           type="bar"
           :options="options"
           :series="series"
@@ -681,15 +685,11 @@ axios.defaults.headers.common['Authorization'] = 'Bearer ' + 'VgcjQR3YAVYWgI-1CT
 
 
 export default {
-  data: function () {
-    return {
-     
-      showPractitioner:false,
-      showReason:false,
-      showDate:false
-    };
-  },
+ 
   setup() {
+    const  showPractitioner = ref(false);
+    const  showReason = ref(false);
+     const showDate = ref(false);
     const observer = ref(null);
     const dark = ref(false);
     const appointments = ref([]);
@@ -710,8 +710,50 @@ export default {
     const show = ref(false);
     const currentPage = ref(1);
     const perPage = ref(100);
-
-    onMounted(() => {
+    const FilterPeriode = ref([
+     {
+        name:'Today',
+        value:0,
+        active:true,
+      },
+      {
+        name:'Yeseterday',
+        value:1,
+        active:false,
+      },
+      {
+        name:'This Week',
+        value:6,
+         active:false,
+      },
+      {
+        name:'Last Week',
+        value:13,
+         active:false,
+      },
+      {
+        name:'This Month',
+        value:29,
+         active:false,
+      },
+      {
+        name:'Last Month',
+        value:59,
+         active:false,
+      },
+      {
+        name:'This Year',
+        value:364,
+         active:false,
+      },
+      {
+        name:'Last Year',
+        value:729,
+         active:false,
+      },
+    ]);
+   const PeriodeIndex = ref(0)
+   onMounted(() => {
       dark.value = document.documentElement.classList.contains("dark");
 
       observer.value = new MutationObserver((records) => {
@@ -728,22 +770,79 @@ export default {
       });
     });
 
-  
+   const SelectNextPeriode = () => {
+      FilterPeriode.value[PeriodeIndex.value].active = false;
+      PeriodeIndex.value = PeriodeIndex.value + 1;
+      if(PeriodeIndex.value > FilterPeriode.value.length - 1){
+        PeriodeIndex.value = 0;
+      }
+      FilterPeriode.value[PeriodeIndex.value].active = true;
+      appointments.value = [];
+      currentPage.value = 1
+      showDate.value = false;
+      loadAppointments();
+
+    };
+    const SelectPrevPeriode = () => {
+      FilterPeriode.value[PeriodeIndex.value].active = false;
+      PeriodeIndex.value = PeriodeIndex.value - 1;
+      if(PeriodeIndex.value < 0){
+        PeriodeIndex.value = FilterPeriode.value.length - 1;
+      }
+      FilterPeriode.value[PeriodeIndex.value].active = true;
+      appointments.value = [];
+      currentPage.value = 1
+       showDate.value = false;
+      loadAppointments();
+    };
+
+    const SelectPeriode = (item) => {
+      item.active = true;
+      FilterPeriode.value.forEach((element,index) => {
+        if(element.name != item.name){
+          element.active = false;
+        }else{
+          PeriodeIndex.value = index;
+        }
+      });
+      appointments.value = [];
+       currentPage.value = 1;
+        showDate.value = false;
+      loadAppointments();
+    };
+
+
 
     const loadAppointments = async () => {
+      show.value = false
       let on = null;
       let before = null;
       let after = null;
+      let periode = FilterPeriode.value[PeriodeIndex.value].value;
       on = new Date();
       //get this month appointments
       on = on.toISOString().split("T")[0];
       //get last month appointments
       before = new Date();
-      before.setDate(before.getDate() );
+      if(periode === 1){
+         before.setDate(before.getDate() - 1 );
+      }
+      else if(periode == 13){
+        before.setDate(before.getDate() - 6 );
+      }
+      else if(periode == 59){
+        before.setDate(before.getDate() - 29 );
+      }
+      else{
+         before.setDate(before.getDate() );
+      }
+     
       before = before.toISOString().split("T")[0];
       //get next month appointments
       after = new Date();
-      after.setDate(after.getDate() - 6 ); // play with this number to get the appointments you want
+      //7 = week, 30 = month, 365 = year, 0 = all, 1 = day,
+     
+      after.setDate(after.getDate() - periode ); // play with this number to get the appointments you want
       after = after.toISOString().split("T")[0];
 
       const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page="  + perPage.value + "&page=" + currentPage.value); 
@@ -752,7 +851,19 @@ export default {
         currentPage.value = response.data.meta.current_page + 1;
         loadAppointments();
       }else{
-        let grouped = groupByMonth(appointments.value, "start_time");
+         let grouped = null;
+        if(periode === 0){
+            grouped = groupByDay(appointments.value, "start_time");
+        }else if(periode === 1){
+            grouped = groupByDay(appointments.value, "start_time");
+        }else if(periode === 6 || periode === 13){
+            grouped = groupByWeek(appointments.value, "start_time");
+        }else if(periode === 29 || periode === 59){
+            grouped = groupByMonth(appointments.value, "start_time");
+        }else if(periode === 364 || periode === 729){
+            grouped = groupByYear(appointments.value, "start_time");
+        }
+       
        // console.log(grouped);
         console.log(appointments);
         options.value.xaxis.categories = Object.keys(grouped);
@@ -764,33 +875,39 @@ export default {
    
     };
 
-
-    const groupBy = (xs, key) => {
-      return xs.reduce((rv, x) => {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-      }, {});
-    };
-
-    const groupByDateOnly = (xs, key) => {
-      return xs.reduce((rv, x) => {
-        (rv[x[key].split("T")[0]] = rv[x[key].split("T")[0]] || []).push(x);
-        return rv;
-      }, {});
-    };
-
-   const displayDayname = (date) => {
-      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      var d = new Date(date);
-      var dayName = days[d.getDay()];
-      return dayName + "/"+ displayMonthAndDay(date);
-    };
-
     const displayMonthAndDay = (date) => {
       var d = new Date(date);
       var month = d.getMonth() + 1;
       var day = d.getDate();
       return month + "/" + day;
+    };
+    const displayTime = (date) => {
+      //return time with AM/PM
+      var d = new Date(date);
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      var strTime = hours + ":" + minutes + " " + ampm;
+      // add month and day
+     
+      return  strTime + " /" +  displayMonthAndDay(date);;
+    };
+
+    const displayMonthandYear = (date) => {
+      var d = new Date(date);
+      var month = d.getMonth() + 1;
+      var year = d.getFullYear();
+      return month + "/" + year;
+    };
+  
+   const displayDayname = (date) => {
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var d = new Date(date);
+      var dayName = days[d.getDay()];
+      return dayName + "/"+ displayMonthAndDay(date);
     };
 
     const groupByWeek = (xs, key) => {
@@ -807,6 +924,24 @@ export default {
       }, {});
     };
 
+    const groupByYear = (xs, key) => {
+      //group by months of the year
+      return xs.reduce((rv, x) => {
+        (rv[displayMonthandYear(x[key])] = rv[displayMonthandYear(x[key])] || []).push(x);
+        return rv;
+      }, {});
+      
+    };
+
+    const groupByDay = (xs, key) => {
+      //group by day time 24h and display it like time / day/ month
+      return xs.reduce((rv, x) => {
+        (rv[displayTime(x[key])] = rv[displayTime(x[key])] || []).push(x);
+        return rv;
+      }, {});
+     
+    };
+
     onMounted(() => {
       loadAppointments();
     });
@@ -821,59 +956,66 @@ export default {
       options,
       series,
       show,
+      FilterPeriode,
+      SelectNextPeriode,
+      SelectPrevPeriode,
+      SelectPeriode,
+      showPractitioner,
+      showReason,
+      showDate,
     };
 
-   const groupByWeekonly = (xs, key) => {
-      return xs.reduce((rv, x) => {
-        (rv[x[key].split("T")[0].split("-")[2]] = rv[x[key].split("T")[0].split("-")[2]] || []).push(x);
-        return rv;
-      }, {});
-    };
+  //  const groupByWeekonly = (xs, key) => {
+  //     return xs.reduce((rv, x) => {
+  //       (rv[x[key].split("T")[0].split("-")[2]] = rv[x[key].split("T")[0].split("-")[2]] || []).push(x);
+  //       return rv;
+  //     }, {});
+  //   };
 
-    const loadChartData = async () => {
-      let on = null;
-      let before = null;
-      let after = null;
-      on = new Date();
-      //get this month appointments
-      on = on.toISOString().split("T")[0];
-      //get last month appointments
-      before = new Date();
-      before.setDate(before.getDate() );
-      before = before.toISOString().split("T")[0];
-      //get next month appointments
-      after = new Date();
-      after.setDate(after.getDate() - 2 ); // play with this number to get the appointments you want
-      after = after.toISOString().split("T")[0];
+  //   const loadChartData = async () => {
+  //     let on = null;
+  //     let before = null;
+  //     let after = null;
+  //     on = new Date();
+  //     //get this month appointments
+  //     on = on.toISOString().split("T")[0];
+  //     //get last month appointments
+  //     before = new Date();
+  //     before.setDate(before.getDate() );
+  //     before = before.toISOString().split("T")[0];
+  //     //get next month appointments
+  //     after = new Date();
+  //     after.setDate(after.getDate() - 2 ); // play with this number to get the appointments you want
+  //     after = after.toISOString().split("T")[0];
 
-      const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
-      appointments.value = response.data.appointments;
-      console.log(response.data);
-      const grouped = groupBy(response.data.appointments, "start_time");
-      console.log(grouped);
-      const chartData = [];
-      for (const [key, value] of Object.entries(grouped)) {
-        chartData.push({ x: key, y: value.length });
-      }
-      console.log(chartData);
-      this.chartData = chartData;
-    };
+  //     const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
+  //     appointments.value = response.data.appointments;
+  //     console.log(response.data);
+  //     const grouped = groupBy(response.data.appointments, "start_time");
+  //     console.log(grouped);
+  //     const chartData = [];
+  //     for (const [key, value] of Object.entries(grouped)) {
+  //       chartData.push({ x: key, y: value.length });
+  //     }
+  //     console.log(chartData);
+  //     this.chartData = chartData;
+  //   };
 
 
-    loadAppointments();
+  //   loadAppointments();
 
-    onBeforeUnmount(() => {
-      observer.value.disconnect();
-      observer.value = null;
-    });
+  //   onBeforeUnmount(() => {
+  //     observer.value.disconnect();
+  //     observer.value = null;
+  //   });
 
-    return {
-      dark,
-      appointments,
-      options,
-      series,
-      show
-    };
+  //   return {
+  //     dark,
+  //     appointments,
+  //     options,
+  //     series,
+  //     show
+  //   };
   },
  
 };
