@@ -10,7 +10,7 @@
             <span class="text-xl font-normal">Filter By </span>
             <div class="flex items-center space-x-4 relative">
               <div
-               @click="showReason = !showReason"
+                @click="showReason = !showReason"
                 class="
                   p-2
                   bg-gray-500
@@ -35,7 +35,7 @@
                 </svg>
               </div>
               <span
-              @click="showReason = !showReason"
+                @click="showReason = !showReason"
                 class="
                   text-xl
                   font-semibold
@@ -44,7 +44,8 @@
                 "
                 >Reason</span
               >
-               <div v-if="showReason"
+              <div
+                v-if="showReason"
                 class="
                   p-5
                   rounded-2xl
@@ -53,7 +54,9 @@
                   bg-white
                   dark:bg-gray-800
                   w-[400px]
-                  space-y-8 z-30 top-10
+                  space-y-8
+                  z-30
+                  top-10
                 "
               >
                 <div class="w-full flex items-center justify-between">
@@ -90,7 +93,11 @@
                 </div>
 
                 <div class="flex flex-col items-start space-y-4">
-                  <div class="flex items-center space-x-4" v-for=" n in 10" :key="n">
+                  <div
+                    class="flex items-center space-x-4"
+                    v-for="n in 10"
+                    :key="n"
+                  >
                     <input
                       :id="n"
                       type="checkbox"
@@ -117,7 +124,7 @@
             </div>
             <div class="flex items-center space-x-4 relative">
               <div
-               @click="showPractitioner = !showPractitioner"
+                @click="showPractitioner = !showPractitioner"
                 class="
                   p-2
                   bg-gray-500
@@ -142,7 +149,7 @@
                 </svg>
               </div>
               <span
-               @click="showPractitioner = !showPractitioner"
+                @click="showPractitioner = !showPractitioner"
                 class="
                   text-xl
                   font-semibold
@@ -152,7 +159,8 @@
                 >Practitioner</span
               >
 
-              <div v-if="showPractitioner"
+              <div
+                v-if="showPractitioner"
                 class="
                   p-5
                   rounded-2xl
@@ -161,7 +169,9 @@
                   bg-white
                   dark:bg-gray-800
                   w-[400px]
-                  space-y-8 z-30 top-10
+                  space-y-8
+                  z-30
+                  top-10
                 "
               >
                 <div class="w-full flex items-center justify-between">
@@ -198,7 +208,11 @@
                 </div>
 
                 <div class="flex flex-col items-start space-y-4">
-                  <div class="flex items-center space-x-4" v-for=" n in 10" :key="n">
+                  <div
+                    class="flex items-center space-x-4"
+                    v-for="n in 10"
+                    :key="n"
+                  >
                     <input
                       :id="n"
                       type="checkbox"
@@ -227,7 +241,7 @@
 
           <div class="flex items-center relative">
             <button
-             @click="SelectNextPeriode"
+              @click="SelectNextPeriode"
               class="h-10 px-2 bg-gray-500 rounded-l-2xl hover:bg-opacity-60"
             >
               <svg
@@ -246,8 +260,7 @@
               </svg>
             </button>
             <button
-            
-             @click="showDate = !showDate"
+              @click="showDate = !showDate"
               class="
                 h-10
                 px-8
@@ -257,10 +270,10 @@
                 hover:bg-opacity-60
               "
             >
-              This Month
+             {{FilterPeriode[PeriodeIndex].name}}
             </button>
             <button
-             @click="SelectPrevPeriode"
+              @click="SelectPrevPeriode"
               class="h-10 px-2 bg-gray-500 rounded-r-2xl hover:bg-opacity-60"
             >
               <svg
@@ -278,43 +291,80 @@
                 />
               </svg>
             </button>
-             <div v-if="showDate"
-                class="
-                  p-5
-                  rounded-2xl
-                  absolute
-                  shadow-md
-                  bg-white
-                  dark:bg-gray-800
-                  w-[200px]
-                  space-y-8 z-30 top-12 right-10
-                "
-              >
-              
-
-                <div class="flex flex-col items-start space-y-4 w-full">
-                  <div class="flex items-center space-x-4 w-full" v-for=" (item,index) in FilterPeriode" :key="index">
-                   
-                  <div @click="SelectPeriode(item)" :class="{'dark:bg-gray-600 bg-gray-800':item.active}" class=" w-full py-2 text-center flex dark:hover:bg-gray-600 hover:bg-gray-800 group  rounded-xl cursor-pointer">
-                      <span  class="text-xl dark:text-white  text-center font-semibold m-auto group-hover:text-white"
-                      >{{item.name}}</span
+            <div
+              v-if="showDate"
+              class="
+                p-5
+                rounded-2xl
+                absolute
+                shadow-md
+                bg-white
+                dark:bg-gray-800
+                w-[200px]
+                space-y-8
+                z-30
+                top-12
+                right-10
+              "
+            >
+              <div class="flex flex-col items-start space-y-4 w-full">
+                <div
+                  class="flex items-center space-x-4 w-full"
+                  v-for="(item, index) in FilterPeriode"
+                  :key="index"
+                >
+                  <div
+                    @click="SelectPeriode(item)"
+                    :class="{ 'dark:bg-gray-600 bg-gray-800': item.active }"
+                    class="
+                      w-full
+                      py-2
+                      text-center
+                      flex
+                      dark:hover:bg-gray-600
+                      hover:bg-gray-800
+                      group
+                      rounded-xl
+                      cursor-pointer
+                    "
+                  >
+                    <span
+                      class="
+                        text-xl
+                        dark:text-white
+                        text-center
+                        font-semibold
+                        m-auto
+                        group-hover:text-white
+                      "
+                      >{{ item.name }}</span
                     >
-                  </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="w-full">
         <apexchart
-         
-         v-if="show"
-          class="w-full"  height="600"
+          v-if="show"
+          class="w-full"
+          height="600"
           type="bar"
           :options="options"
           :series="series"
         ></apexchart>
+
+        <div v-else class=" w-full h-[600px] bg-gray-400 dark:bg-gray-800 flex rounded-2xl">
+          <div class=" m-auto flex flex-col items-center space-y-4">
+            <img src="/assets/loading.gif" alt="">
+            <div class=" flex flex-col items-center space-y-2">
+              <span class="font-medium text-4xl text-primary-600 ">Processing ({{currentPage}}/ {{totalPage}})...</span>
+              <span  class="font-medium text-xl text-gray-900 dark:text-gray-300">We are processing the data, it may take some time.</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="w-full flex flex-col items-start space-y-8">
         <div class="flex items-start space-x-10">
@@ -329,7 +379,7 @@
               "
               >Total Appointments</span
             >
-            <span class="text-2xl font-semibold">10 Appointments </span>
+            <span class="text-2xl font-semibold">{{totalResultTable}} Appointments </span>
           </div>
           <div class="flex flex-col items-start space-y-2">
             <span
@@ -342,7 +392,7 @@
               "
               >Total Hours</span
             >
-            <span class="text-2xl font-semibold">15:02:10 </span>
+            <span class="text-2xl font-semibold">{{totalTime}}</span>
           </div>
         </div>
 
@@ -362,7 +412,7 @@
             <div class="relative">
               <!---->
               <div class="overflow-hidden overflow-x-auto relative">
-                <table class="w-full" data-testid="resource-table" >
+                <table class="w-full" data-testid="resource-table">
                   <thead class="bg-gray-50 dark:bg-gray-800">
                     <tr>
                       <th
@@ -505,7 +555,7 @@
                           >
                         </button>
                       </th>
-                       <th
+                      <th
                         class="
                           text-left
                           px-2
@@ -546,7 +596,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr dusk="1-row" class="group" v-for="(item,index) in appointments" :key="index" >
+                    <tr
+                      dusk="1-row"
+                      class="group"
+                      v-for="(item, index) in appointmentsTable"
+                      :key="index"
+                    >
                       <td
                         class="
                           px-2
@@ -576,11 +631,9 @@
                         "
                       >
                         <div class="text-left">
-                          <a
-                            class="link-default"
-                            href="javascript:void(0)"
-                            >{{item.id}}</a
-                          >
+                          <a class="link-default" href="javascript:void(0)">{{
+                            item.id
+                          }}</a>
                         </div>
                       </td>
                       <td
@@ -601,7 +654,11 @@
                           resource="[object Object]"
                         >
                           <img
-                            :src="item.patient_image_url ? item.patient_image_url :  'https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300'"
+                            :src="
+                              item.patient_image_url
+                                ? item.patient_image_url
+                                : 'https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300'
+                            "
                             class="inline-block rounded-full"
                             draggable="false"
                             style="max-width: 30px"
@@ -622,9 +679,9 @@
                         "
                       >
                         <div class="text-left" resource="[object Object]">
-                          <span class="text-90 whitespace-nowrap"
-                            >{{item.patient_name ? item.patient_name : '.....'}}</span
-                          >
+                          <span class="text-90 whitespace-nowrap">{{
+                            item.patient_name ? item.patient_name : "....."
+                          }}</span>
                         </div>
                       </td>
                       <td
@@ -641,12 +698,12 @@
                         "
                       >
                         <div class="text-left" resource="[object Object]">
-                          <span class="text-90 whitespace-nowrap"
-                            >{{item.start_time}}</span
-                          >
+                          <span class="text-90 whitespace-nowrap">{{
+                            readAbleDateTime(item.start_time)
+                          }}</span>
                         </div>
                       </td>
-                       <td
+                      <td
                         class="
                           px-2
                           py-2
@@ -660,14 +717,96 @@
                         "
                       >
                         <div class="text-left" resource="[object Object]">
-                          <span class="text-90 whitespace-nowrap"
-                            >{{item.created_at}}</span
-                          >
+                          <span class="text-90 whitespace-nowrap">{{
+                            readAbleDateTime(item.created_at)
+                          }}</span>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <nav
+                  class="
+                    flex
+                    items-center
+                    justify-between
+                    border-t border-gray-200
+                    bg-white dark:bg-gray-800
+                    px-4
+                    py-3
+                    sm:px-6
+                  "
+                  aria-label="Pagination"
+                >
+                  <div class="hidden sm:block">
+                    <p class="text-sm text-gray-700 dark:text-gray-300">
+                      Showing
+                      {{ " " }}
+                      <span class="font-medium">{{appointmentsTable.length}}</span>
+                      {{ " " }}
+                      to
+                      {{ " " }}
+                      <span class="font-medium">{{perPageTable}}</span>
+                      {{ " " }}
+                      of
+                      {{ " " }}
+                      <span class="font-medium">{{totalResultTable}}</span>
+                      {{ " " }}
+                      results.
+                      {{ " | " }}
+                       <span class="font-medium">{{currentPageTable}}</span>
+                      {{ " " }}
+                     
+                      {{ "page of " }}
+                       <span class="font-medium">{{totalTable}}</span>
+                           pages
+                      {{ " " }}
+
+                    </p>
+                  </div>
+                  <div class="flex flex-1 justify-between sm:justify-end">
+                    <a
+                      href="#" @click.prevent="PrevPage"
+                      class="
+                        relative
+                        inline-flex
+                        items-center
+                        rounded-md
+                        border border-gray-300
+                        bg-white
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        hover:bg-gray-50
+                      "
+                      v-if="currentPageTable > 1"
+                      
+                      >Previous</a
+                    >
+                    <a
+                      href="#" @click.prevent="NextPage"
+                      class="
+                        relative
+                        ml-3
+                        inline-flex
+                        items-center
+                        rounded-md
+                        border border-gray-300
+                        bg-white
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-gray-700
+                        hover:bg-gray-50
+                      "
+                      v-if="currentPageTable < totalTable"
+                      >Next</a
+                    >
+                  </div>
+                </nav>
               </div>
             </div>
           </div>
@@ -680,19 +819,20 @@
 <script>
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import axios from "axios";
-axios.defaults.baseURL = 'https://api.dentally.co/v1/';
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + 'VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0'
-
+axios.defaults.baseURL = "https://api.dentally.co/v1/";
+axios.defaults.headers.common["Authorization"] =
+  "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";
 
 export default {
- 
   setup() {
-    const  showPractitioner = ref(false);
-    const  showReason = ref(false);
-     const showDate = ref(false);
+    const showPractitioner = ref(false);
+    const showReason = ref(false);
+    const showDate = ref(false);
     const observer = ref(null);
     const dark = ref(false);
     const appointments = ref([]);
+    const appointmentsTable = ref([]);
+    const totalTime = ref('00:00'); //15:02:10
     const options = ref({
       chart: {
         id: "vuechart-example",
@@ -703,57 +843,62 @@ export default {
     });
     const series = ref([
       {
-        name: "Appointments", 
+        name: "Appointments",
         data: [],
       },
     ]);
     const show = ref(false);
     const currentPage = ref(1);
     const perPage = ref(100);
+    const totalPage  = ref(1);
+    const currentPageTable = ref(1);
+    const perPageTable = ref(25);
+    const totalTable = ref(0);
+    const totalResultTable = ref(0);
     const FilterPeriode = ref([
-     {
-        name:'Today',
-        value:0,
-        active:true,
+      {
+        name: "Today",
+        value: 0,
+        active: true,
       },
       {
-        name:'Yeseterday',
-        value:1,
-        active:false,
+        name: "Yeseterday",
+        value: 1,
+        active: false,
       },
       {
-        name:'This Week',
-        value:6,
-         active:false,
+        name: "This Week",
+        value: 6,
+        active: false,
       },
       {
-        name:'Last Week',
-        value:13,
-         active:false,
+        name: "Last Week",
+        value: 13,
+        active: false,
       },
       {
-        name:'This Month',
-        value:29,
-         active:false,
+        name: "This Month",
+        value: 29,
+        active: false,
       },
       {
-        name:'Last Month',
-        value:59,
-         active:false,
+        name: "Last Month",
+        value: 59,
+        active: false,
       },
       {
-        name:'This Year',
-        value:364,
-         active:false,
+        name: "This Year",
+        value: 364,
+        active: false,
       },
       {
-        name:'Last Year',
-        value:729,
-         active:false,
+        name: "Last Year",
+        value: 729,
+        active: false,
       },
     ]);
-   const PeriodeIndex = ref(0)
-   onMounted(() => {
+    const PeriodeIndex = ref(0);
+    onMounted(() => {
       dark.value = document.documentElement.classList.contains("dark");
 
       observer.value = new MutationObserver((records) => {
@@ -770,51 +915,69 @@ export default {
       });
     });
 
-   const SelectNextPeriode = () => {
+    const SelectNextPeriode = () => {
       FilterPeriode.value[PeriodeIndex.value].active = false;
       PeriodeIndex.value = PeriodeIndex.value + 1;
-      if(PeriodeIndex.value > FilterPeriode.value.length - 1){
+      if (PeriodeIndex.value > FilterPeriode.value.length - 1) {
         PeriodeIndex.value = 0;
       }
       FilterPeriode.value[PeriodeIndex.value].active = true;
       appointments.value = [];
-      currentPage.value = 1
+      currentPage.value = 1;
       showDate.value = false;
       loadAppointments();
-
+       loadPaginatedAppointments();
     };
     const SelectPrevPeriode = () => {
       FilterPeriode.value[PeriodeIndex.value].active = false;
       PeriodeIndex.value = PeriodeIndex.value - 1;
-      if(PeriodeIndex.value < 0){
+      if (PeriodeIndex.value < 0) {
         PeriodeIndex.value = FilterPeriode.value.length - 1;
       }
       FilterPeriode.value[PeriodeIndex.value].active = true;
       appointments.value = [];
-      currentPage.value = 1
-       showDate.value = false;
+      currentPage.value = 1;
+      showDate.value = false;
       loadAppointments();
+       loadPaginatedAppointments();
     };
 
     const SelectPeriode = (item) => {
       item.active = true;
-      FilterPeriode.value.forEach((element,index) => {
-        if(element.name != item.name){
+      FilterPeriode.value.forEach((element, index) => {
+        if (element.name != item.name) {
           element.active = false;
-        }else{
+        } else {
           PeriodeIndex.value = index;
         }
       });
       appointments.value = [];
-       currentPage.value = 1;
-        showDate.value = false;
+      currentPage.value = 1;
+      showDate.value = false;
       loadAppointments();
+      loadPaginatedAppointments();
     };
 
 
+    const NextPage = () => {
+      currentPageTable.value = currentPageTable.value + 1;
+      if (currentPageTable.value > totalTable.value) {
+        currentPageTable.value = totalTable.value;
+      }
+      loadPaginatedAppointments();
+      
+    };
+
+    const PrevPage = () => {
+      currentPageTable.value = currentPageTable.value - 1;
+      if (currentPageTable.value < 1) {
+        currentPageTable.value = 1;
+      }
+      loadPaginatedAppointments();
+    };
 
     const loadAppointments = async () => {
-      show.value = false
+      show.value = false;
       let on = null;
       let before = null;
       let after = null;
@@ -824,55 +987,108 @@ export default {
       on = on.toISOString().split("T")[0];
       //get last month appointments
       before = new Date();
-      if(periode === 1){
-         before.setDate(before.getDate() - 1 );
+      if (periode === 1) {
+        before.setDate(before.getDate() - 1);
+      } else if (periode == 13) {
+        before.setDate(before.getDate() - 6);
+      } else if (periode == 59) {
+        before.setDate(before.getDate() - 29);
+      } else {
+        before.setDate(before.getDate());
       }
-      else if(periode == 13){
-        before.setDate(before.getDate() - 6 );
-      }
-      else if(periode == 59){
-        before.setDate(before.getDate() - 29 );
-      }
-      else{
-         before.setDate(before.getDate() );
-      }
-     
+
       before = before.toISOString().split("T")[0];
       //get next month appointments
       after = new Date();
       //7 = week, 30 = month, 365 = year, 0 = all, 1 = day,
-     
-      after.setDate(after.getDate() - periode ); // play with this number to get the appointments you want
+
+      after.setDate(after.getDate() - periode); // play with this number to get the appointments you want
       after = after.toISOString().split("T")[0];
 
-      const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page="  + perPage.value + "&page=" + currentPage.value); 
-      appointments.value = appointments.value.concat(response.data.appointments);
-    if(response.data.meta.current_page < response.data.meta.total_pages){
+      const response = await axios.get(
+        "appointments?&before=" +
+          before +
+          "&after=" +
+          after +
+          "&per_page=" +
+          perPage.value +
+          "&page=" +
+          currentPage.value
+      );
+      appointments.value = appointments.value.concat(
+        response.data.appointments
+      );
+      totalPage.value = response.data.meta.total_pages;
+      if (response.data.meta.current_page < response.data.meta.total_pages) {
         currentPage.value = response.data.meta.current_page + 1;
         loadAppointments();
-      }else{
-         let grouped = null;
-        if(periode === 0){
-            grouped = groupByDay(appointments.value, "start_time");
-        }else if(periode === 1){
-            grouped = groupByDay(appointments.value, "start_time");
-        }else if(periode === 6 || periode === 13){
-            grouped = groupByWeek(appointments.value, "start_time");
-        }else if(periode === 29 || periode === 59){
-            grouped = groupByMonth(appointments.value, "start_time");
-        }else if(periode === 364 || periode === 729){
-            grouped = groupByYear(appointments.value, "start_time");
+      } else {
+        let grouped = null;
+        if (periode === 0) {
+          grouped = groupByDay(appointments.value, "start_time");
+        } else if (periode === 1) {
+          grouped = groupByDay(appointments.value, "start_time");
+        } else if (periode === 6 || periode === 13) {
+          grouped = groupByWeek(appointments.value, "start_time");
+        } else if (periode === 29 || periode === 59) {
+          grouped = groupByMonth(appointments.value, "start_time");
+        } else if (periode === 364 || periode === 729) {
+          grouped = groupByYear(appointments.value, "start_time");
         }
-       
-       // console.log(grouped);
+
+        // console.log(grouped);
         console.log(appointments);
         options.value.xaxis.categories = Object.keys(grouped);
         //console.log(options.value.xaxis.categories);
-        series.value[0].data = Object.values(grouped).map((item) => item.length);
+        series.value[0].data = Object.values(grouped).map(
+          (item) => item.length
+        );
+        getTotalTime();
         show.value = true;
       }
-     
-   
+    };
+
+    const loadPaginatedAppointments = async () => {
+      let on = null;
+      let before = null;
+      let after = null;
+      let periode = FilterPeriode.value[PeriodeIndex.value].value;
+      on = new Date();
+      //get this month appointments
+      on = on.toISOString().split("T")[0];
+      //get last month appointments
+      before = new Date();
+      if (periode === 1) {
+        before.setDate(before.getDate() - 1);
+      } else if (periode == 13) {
+        before.setDate(before.getDate() - 6);
+      } else if (periode == 59) {
+        before.setDate(before.getDate() - 29);
+      } else {
+        before.setDate(before.getDate());
+      }
+
+      before = before.toISOString().split("T")[0];
+      //get next month appointments
+      after = new Date();
+      //7 = week, 30 = month, 365 = year, 0 = all, 1 = day,
+
+      after.setDate(after.getDate() - periode); // play with this number to get the appointments you want
+      after = after.toISOString().split("T")[0];
+
+      const response = await axios.get(
+        "appointments?&before=" +
+          before +
+          "&after=" +
+          after +
+          "&per_page=" +
+          perPageTable.value +
+          "&page=" +
+          currentPageTable.value
+      );
+      appointmentsTable.value = response.data.appointments;
+      totalTable.value = response.data.meta.total_pages;
+      totalResultTable.value = response.data.meta.total;
     };
 
     const displayMonthAndDay = (date) => {
@@ -892,8 +1108,8 @@ export default {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       var strTime = hours + ":" + minutes + " " + ampm;
       // add month and day
-     
-      return  strTime + " /" +  displayMonthAndDay(date);;
+
+      return strTime + " /" + displayMonthAndDay(date);
     };
 
     const displayMonthandYear = (date) => {
@@ -902,12 +1118,20 @@ export default {
       var year = d.getFullYear();
       return month + "/" + year;
     };
-  
-   const displayDayname = (date) => {
-      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    const displayDayname = (date) => {
+      var days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
       var d = new Date(date);
       var dayName = days[d.getDay()];
-      return dayName + "/"+ displayMonthAndDay(date);
+      return dayName + "/" + displayMonthAndDay(date);
     };
 
     const groupByWeek = (xs, key) => {
@@ -919,7 +1143,8 @@ export default {
 
     const groupByMonth = (xs, key) => {
       return xs.reduce((rv, x) => {
-        (rv[displayMonthAndDay(x[key])] = rv[displayMonthAndDay(x[key])] || []).push(x);
+        (rv[displayMonthAndDay(x[key])] =
+          rv[displayMonthAndDay(x[key])] || []).push(x);
         return rv;
       }, {});
     };
@@ -927,11 +1152,26 @@ export default {
     const groupByYear = (xs, key) => {
       //group by months of the year
       return xs.reduce((rv, x) => {
-        (rv[displayMonthandYear(x[key])] = rv[displayMonthandYear(x[key])] || []).push(x);
+        (rv[displayMonthandYear(x[key])] =
+          rv[displayMonthandYear(x[key])] || []).push(x);
         return rv;
       }, {});
-      
     };
+
+    const getTotalTime = () => {
+      //get total time of all appointments 15:02:10
+      let time = 0;
+      appointments.value.forEach((item) => {
+       let total = item.start_time; // 2022-10-19T08:00:00.000+01:00
+        total = total.split("T")[1]; // 08:00:00.000+01:00
+        total = total.split(":"); // [08, 00, 00.000+01, 00]
+        total = total[0] * 60 + total[1] * 1; // 480
+        time += total;
+      });
+      let hours = Math.floor(time / 60);
+      let minutes = time % 60;
+      totalTime.value =  hours + "H:" + minutes + "M";
+    }
 
     const groupByDay = (xs, key) => {
       //group by day time 24h and display it like time / day/ month
@@ -939,11 +1179,27 @@ export default {
         (rv[displayTime(x[key])] = rv[displayTime(x[key])] || []).push(x);
         return rv;
       }, {});
-     
     };
+
+    const readAbleDateTime = (date) => {
+      //date = 2022-10-06T07:00:00.000+01:00
+      let d = new Date(date);
+      let day = d.getDate();
+      let month = d.getMonth() + 1;
+      let year = d.getFullYear();
+      let hours = d.getHours();
+      let minutes = d.getMinutes();
+      let ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      var strTime = hours + ":" + minutes + " " + ampm;
+      return strTime + " /" + day + "/" + month + "/" + year;
+    }
 
     onMounted(() => {
       loadAppointments();
+      loadPaginatedAppointments();
     });
 
     onBeforeUnmount(() => {
@@ -957,67 +1213,27 @@ export default {
       series,
       show,
       FilterPeriode,
+      PeriodeIndex,
       SelectNextPeriode,
       SelectPrevPeriode,
       SelectPeriode,
       showPractitioner,
       showReason,
       showDate,
+      currentPage,
+      totalPage,
+      appointmentsTable,
+      currentPageTable,
+      perPageTable,
+      totalTable,
+      NextPage,
+      PrevPage,
+      totalResultTable,
+      totalTime,
+      readAbleDateTime
     };
 
-  //  const groupByWeekonly = (xs, key) => {
-  //     return xs.reduce((rv, x) => {
-  //       (rv[x[key].split("T")[0].split("-")[2]] = rv[x[key].split("T")[0].split("-")[2]] || []).push(x);
-  //       return rv;
-  //     }, {});
-  //   };
-
-  //   const loadChartData = async () => {
-  //     let on = null;
-  //     let before = null;
-  //     let after = null;
-  //     on = new Date();
-  //     //get this month appointments
-  //     on = on.toISOString().split("T")[0];
-  //     //get last month appointments
-  //     before = new Date();
-  //     before.setDate(before.getDate() );
-  //     before = before.toISOString().split("T")[0];
-  //     //get next month appointments
-  //     after = new Date();
-  //     after.setDate(after.getDate() - 2 ); // play with this number to get the appointments you want
-  //     after = after.toISOString().split("T")[0];
-
-  //     const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
-  //     appointments.value = response.data.appointments;
-  //     console.log(response.data);
-  //     const grouped = groupBy(response.data.appointments, "start_time");
-  //     console.log(grouped);
-  //     const chartData = [];
-  //     for (const [key, value] of Object.entries(grouped)) {
-  //       chartData.push({ x: key, y: value.length });
-  //     }
-  //     console.log(chartData);
-  //     this.chartData = chartData;
-  //   };
-
-
-  //   loadAppointments();
-
-  //   onBeforeUnmount(() => {
-  //     observer.value.disconnect();
-  //     observer.value = null;
-  //   });
-
-  //   return {
-  //     dark,
-  //     appointments,
-  //     options,
-  //     series,
-  //     show
-  //   };
   },
- 
 };
 </script>
 

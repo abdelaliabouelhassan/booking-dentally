@@ -47,8 +47,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.baseURL = 'https://api.dentally.co/v1/';
-axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorization = 'Bearer ' + 'VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0';
+axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.baseURL = "https://api.dentally.co/v1/";
+axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorization = "Bearer " + "VgcjQR3YAVYWgI-1CTh27ap-y4fyuokf8hwGNLmPZk0";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var showPractitioner = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
@@ -57,6 +57,8 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
     var observer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var dark = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var appointments = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var appointmentsTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var totalTime = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('00:00'); //15:02:10
     var options = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
       chart: {
         id: "vuechart-example"
@@ -72,36 +74,41 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
     var show = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var currentPage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
     var perPage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(100);
+    var totalPage = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
+    var currentPageTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(1);
+    var perPageTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(25);
+    var totalTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
+    var totalResultTable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     var FilterPeriode = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([{
-      name: 'Today',
+      name: "Today",
       value: 0,
       active: true
     }, {
-      name: 'Yeseterday',
+      name: "Yeseterday",
       value: 1,
       active: false
     }, {
-      name: 'This Week',
+      name: "This Week",
       value: 6,
       active: false
     }, {
-      name: 'Last Week',
+      name: "Last Week",
       value: 13,
       active: false
     }, {
-      name: 'This Month',
+      name: "This Month",
       value: 29,
       active: false
     }, {
-      name: 'Last Month',
+      name: "Last Month",
       value: 59,
       active: false
     }, {
-      name: 'This Year',
+      name: "This Year",
       value: 364,
       active: false
     }, {
-      name: 'Last Year',
+      name: "Last Year",
       value: 729,
       active: false
     }]);
@@ -131,6 +138,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       currentPage.value = 1;
       showDate.value = false;
       loadAppointments();
+      loadPaginatedAppointments();
     };
     var SelectPrevPeriode = function SelectPrevPeriode() {
       FilterPeriode.value[PeriodeIndex.value].active = false;
@@ -143,6 +151,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       currentPage.value = 1;
       showDate.value = false;
       loadAppointments();
+      loadPaginatedAppointments();
     };
     var SelectPeriode = function SelectPeriode(item) {
       item.active = true;
@@ -157,6 +166,21 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       currentPage.value = 1;
       showDate.value = false;
       loadAppointments();
+      loadPaginatedAppointments();
+    };
+    var NextPage = function NextPage() {
+      currentPageTable.value = currentPageTable.value + 1;
+      if (currentPageTable.value > totalTable.value) {
+        currentPageTable.value = totalTable.value;
+      }
+      loadPaginatedAppointments();
+    };
+    var PrevPage = function PrevPage() {
+      currentPageTable.value = currentPageTable.value - 1;
+      if (currentPageTable.value < 1) {
+        currentPageTable.value = 1;
+      }
+      loadPaginatedAppointments();
     };
     var loadAppointments = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -196,6 +220,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
               case 15:
                 response = _context.sent;
                 appointments.value = appointments.value.concat(response.data.appointments);
+                totalPage.value = response.data.meta.total_pages;
                 if (response.data.meta.current_page < response.data.meta.total_pages) {
                   currentPage.value = response.data.meta.current_page + 1;
                   loadAppointments();
@@ -220,9 +245,10 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
                   series.value[0].data = Object.values(grouped).map(function (item) {
                     return item.length;
                   });
+                  getTotalTime();
                   show.value = true;
                 }
-              case 18:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -231,6 +257,56 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       }));
       return function loadAppointments() {
         return _ref.apply(this, arguments);
+      };
+    }();
+    var loadPaginatedAppointments = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var on, before, after, periode, response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                on = null;
+                before = null;
+                after = null;
+                periode = FilterPeriode.value[PeriodeIndex.value].value;
+                on = new Date();
+                //get this month appointments
+                on = on.toISOString().split("T")[0];
+                //get last month appointments
+                before = new Date();
+                if (periode === 1) {
+                  before.setDate(before.getDate() - 1);
+                } else if (periode == 13) {
+                  before.setDate(before.getDate() - 6);
+                } else if (periode == 59) {
+                  before.setDate(before.getDate() - 29);
+                } else {
+                  before.setDate(before.getDate());
+                }
+                before = before.toISOString().split("T")[0];
+                //get next month appointments
+                after = new Date();
+                //7 = week, 30 = month, 365 = year, 0 = all, 1 = day,
+
+                after.setDate(after.getDate() - periode); // play with this number to get the appointments you want
+                after = after.toISOString().split("T")[0];
+                _context2.next = 14;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("appointments?&before=" + before + "&after=" + after + "&per_page=" + perPageTable.value + "&page=" + currentPageTable.value);
+              case 14:
+                response = _context2.sent;
+                appointmentsTable.value = response.data.appointments;
+                totalTable.value = response.data.meta.total_pages;
+                totalResultTable.value = response.data.meta.total;
+              case 18:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+      return function loadPaginatedAppointments() {
+        return _ref2.apply(this, arguments);
       };
     }();
     var displayMonthAndDay = function displayMonthAndDay(date) {
@@ -252,7 +328,6 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       // add month and day
 
       return strTime + " /" + displayMonthAndDay(date);
-      ;
     };
     var displayMonthandYear = function displayMonthandYear(date) {
       var d = new Date(date);
@@ -261,7 +336,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       return month + "/" + year;
     };
     var displayDayname = function displayDayname(date) {
-      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       var d = new Date(date);
       var dayName = days[d.getDay()];
       return dayName + "/" + displayMonthAndDay(date);
@@ -285,6 +360,20 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
         return rv;
       }, {});
     };
+    var getTotalTime = function getTotalTime() {
+      //get total time of all appointments 15:02:10
+      var time = 0;
+      appointments.value.forEach(function (item) {
+        var total = item.start_time; // 2022-10-19T08:00:00.000+01:00
+        total = total.split("T")[1]; // 08:00:00.000+01:00
+        total = total.split(":"); // [08, 00, 00.000+01, 00]
+        total = total[0] * 60 + total[1] * 1; // 480
+        time += total;
+      });
+      var hours = Math.floor(time / 60);
+      var minutes = time % 60;
+      totalTime.value = hours + "H:" + minutes + "M";
+    };
     var groupByDay = function groupByDay(xs, key) {
       //group by day time 24h and display it like time / day/ month
       return xs.reduce(function (rv, x) {
@@ -292,8 +381,24 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
         return rv;
       }, {});
     };
+    var readAbleDateTime = function readAbleDateTime(date) {
+      //date = 2022-10-06T07:00:00.000+01:00
+      var d = new Date(date);
+      var day = d.getDate();
+      var month = d.getMonth() + 1;
+      var year = d.getFullYear();
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      var strTime = hours + ":" + minutes + " " + ampm;
+      return strTime + " /" + day + "/" + month + "/" + year;
+    };
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       loadAppointments();
+      loadPaginatedAppointments();
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount)(function () {
       observer.value.disconnect();
@@ -305,64 +410,25 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
       series: series,
       show: show,
       FilterPeriode: FilterPeriode,
+      PeriodeIndex: PeriodeIndex,
       SelectNextPeriode: SelectNextPeriode,
       SelectPrevPeriode: SelectPrevPeriode,
       SelectPeriode: SelectPeriode,
       showPractitioner: showPractitioner,
       showReason: showReason,
-      showDate: showDate
+      showDate: showDate,
+      currentPage: currentPage,
+      totalPage: totalPage,
+      appointmentsTable: appointmentsTable,
+      currentPageTable: currentPageTable,
+      perPageTable: perPageTable,
+      totalTable: totalTable,
+      NextPage: NextPage,
+      PrevPage: PrevPage,
+      totalResultTable: totalResultTable,
+      totalTime: totalTime,
+      readAbleDateTime: readAbleDateTime
     };
-
-    //  const groupByWeekonly = (xs, key) => {
-    //     return xs.reduce((rv, x) => {
-    //       (rv[x[key].split("T")[0].split("-")[2]] = rv[x[key].split("T")[0].split("-")[2]] || []).push(x);
-    //       return rv;
-    //     }, {});
-    //   };
-
-    //   const loadChartData = async () => {
-    //     let on = null;
-    //     let before = null;
-    //     let after = null;
-    //     on = new Date();
-    //     //get this month appointments
-    //     on = on.toISOString().split("T")[0];
-    //     //get last month appointments
-    //     before = new Date();
-    //     before.setDate(before.getDate() );
-    //     before = before.toISOString().split("T")[0];
-    //     //get next month appointments
-    //     after = new Date();
-    //     after.setDate(after.getDate() - 2 ); // play with this number to get the appointments you want
-    //     after = after.toISOString().split("T")[0];
-
-    //     const response = await axios.get("appointments?&before=" + before   + "&after=" + after    + "&per_page=100");
-    //     appointments.value = response.data.appointments;
-    //     console.log(response.data);
-    //     const grouped = groupBy(response.data.appointments, "start_time");
-    //     console.log(grouped);
-    //     const chartData = [];
-    //     for (const [key, value] of Object.entries(grouped)) {
-    //       chartData.push({ x: key, y: value.length });
-    //     }
-    //     console.log(chartData);
-    //     this.chartData = chartData;
-    //   };
-
-    //   loadAppointments();
-
-    //   onBeforeUnmount(() => {
-    //     observer.value.disconnect();
-    //     observer.value = null;
-    //   });
-
-    //   return {
-    //     dark,
-    //     appointments,
-    //     options,
-    //     series,
-    //     show
-    //   };
   }
 });
 
@@ -496,29 +562,69 @@ var _hoisted_32 = {
   "class": "w-full"
 };
 var _hoisted_33 = {
+  key: 1,
+  "class": "w-full h-[600px] bg-gray-400 dark:bg-gray-800 flex rounded-2xl"
+};
+var _hoisted_34 = {
+  "class": "m-auto flex flex-col items-center space-y-4"
+};
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/assets/loading.gif",
+  alt: ""
+}, null, -1 /* HOISTED */);
+var _hoisted_36 = {
+  "class": "flex flex-col items-center space-y-2"
+};
+var _hoisted_37 = {
+  "class": "font-medium text-4xl text-primary-600"
+};
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "font-medium text-xl text-gray-900 dark:text-gray-300"
+}, "We are processing the data, it may take some time.", -1 /* HOISTED */);
+var _hoisted_39 = {
   "class": "w-full flex flex-col items-start space-y-8"
 };
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-start space-x-10\"><div class=\"flex flex-col items-start space-y-2\"><span class=\"text-xl font-normal capitalize text-gray-900 dark:text-gray-300\">Total Appointments</span><span class=\"text-2xl font-semibold\">10 Appointments </span></div><div class=\"flex flex-col items-start space-y-2\"><span class=\"text-xl font-normal capitalize text-gray-900 dark:text-gray-300\">Total Hours</span><span class=\"text-2xl font-semibold\">15:02:10 </span></div></div>", 1);
-var _hoisted_35 = {
+var _hoisted_40 = {
+  "class": "flex items-start space-x-10"
+};
+var _hoisted_41 = {
+  "class": "flex flex-col items-start space-y-2"
+};
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-xl font-normal capitalize text-gray-900 dark:text-gray-300"
+}, "Total Appointments", -1 /* HOISTED */);
+var _hoisted_43 = {
+  "class": "text-2xl font-semibold"
+};
+var _hoisted_44 = {
+  "class": "flex flex-col items-start space-y-2"
+};
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-xl font-normal capitalize text-gray-900 dark:text-gray-300"
+}, "Total Hours", -1 /* HOISTED */);
+var _hoisted_46 = {
+  "class": "text-2xl font-semibold"
+};
+var _hoisted_47 = {
   "class": "w-full"
 };
-var _hoisted_36 = {
+var _hoisted_48 = {
   "class": "bg-white dark:bg-gray-800 rounded-lg shadow"
 };
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex flex-col md:flex-row md:items-center py-3 border-b border-gray-200 dark:border-gray-700"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("")], -1 /* HOISTED */);
-var _hoisted_38 = {
+var _hoisted_50 = {
   "class": "relative"
 };
-var _hoisted_39 = {
+var _hoisted_51 = {
   "class": "overflow-hidden overflow-x-auto relative"
 };
-var _hoisted_40 = {
+var _hoisted_52 = {
   "class": "w-full",
   "data-testid": "resource-table"
 };
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
   "class": "bg-gray-50 dark:bg-gray-800"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "text-left px-2 whitespace-nowrap uppercase text-gray-500 text-xxs tracking-wide py-2"
@@ -563,58 +669,86 @@ var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "inline-flex font-sans font-bold uppercase text-xxs tracking-wide text-gray-500"
 }, "booking date")])])])], -1 /* HOISTED */);
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
   "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "hidden"
 }, "Resource")], -1 /* HOISTED */);
-var _hoisted_43 = {
-  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
-};
-var _hoisted_44 = {
-  "class": "text-left"
-};
-var _hoisted_45 = {
-  "class": "link-default",
-  href: "javascript:void(0)"
-};
-var _hoisted_46 = {
-  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
-};
-var _hoisted_47 = {
-  "class": "items-center justify-center flex text-center",
-  resource: "[object Object]"
-};
-var _hoisted_48 = ["src"];
-var _hoisted_49 = {
-  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
-};
-var _hoisted_50 = {
-  "class": "text-left",
-  resource: "[object Object]"
-};
-var _hoisted_51 = {
-  "class": "text-90 whitespace-nowrap"
-};
-var _hoisted_52 = {
-  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
-};
-var _hoisted_53 = {
-  "class": "text-left",
-  resource: "[object Object]"
-};
-var _hoisted_54 = {
-  "class": "text-90 whitespace-nowrap"
-};
 var _hoisted_55 = {
   "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
 };
 var _hoisted_56 = {
+  "class": "text-left"
+};
+var _hoisted_57 = {
+  "class": "link-default",
+  href: "javascript:void(0)"
+};
+var _hoisted_58 = {
+  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+};
+var _hoisted_59 = {
+  "class": "items-center justify-center flex text-center",
+  resource: "[object Object]"
+};
+var _hoisted_60 = ["src"];
+var _hoisted_61 = {
+  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+};
+var _hoisted_62 = {
   "class": "text-left",
   resource: "[object Object]"
 };
-var _hoisted_57 = {
+var _hoisted_63 = {
   "class": "text-90 whitespace-nowrap"
+};
+var _hoisted_64 = {
+  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+};
+var _hoisted_65 = {
+  "class": "text-left",
+  resource: "[object Object]"
+};
+var _hoisted_66 = {
+  "class": "text-90 whitespace-nowrap"
+};
+var _hoisted_67 = {
+  "class": "px-2 py-2 border-t border-gray-100 dark:border-gray-700 whitespace-nowrap cursor-pointer dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-900"
+};
+var _hoisted_68 = {
+  "class": "text-left",
+  resource: "[object Object]"
+};
+var _hoisted_69 = {
+  "class": "text-90 whitespace-nowrap"
+};
+var _hoisted_70 = {
+  "class": "flex items-center justify-between border-t border-gray-200 bg-white dark:bg-gray-800 px-4 py-3 sm:px-6",
+  "aria-label": "Pagination"
+};
+var _hoisted_71 = {
+  "class": "hidden sm:block"
+};
+var _hoisted_72 = {
+  "class": "text-sm text-gray-700 dark:text-gray-300"
+};
+var _hoisted_73 = {
+  "class": "font-medium"
+};
+var _hoisted_74 = {
+  "class": "font-medium"
+};
+var _hoisted_75 = {
+  "class": "font-medium"
+};
+var _hoisted_76 = {
+  "class": "font-medium"
+};
+var _hoisted_77 = {
+  "class": "font-medium"
+};
+var _hoisted_78 = {
+  "class": "flex flex-1 justify-between sm:justify-end"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_apexchart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("apexchart");
@@ -678,7 +812,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.showDate = !$setup.showDate;
     }),
     "class": "h-10 px-8 bg-gray-600 text-white text-xl font-medium hover:bg-opacity-60"
-  }, " This Month "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.FilterPeriode[$setup.PeriodeIndex].name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[6] || (_cache[6] = function () {
       return $setup.SelectPrevPeriode && $setup.SelectPrevPeriode.apply($setup, arguments);
     }),
@@ -702,20 +836,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "bar",
     options: $setup.options,
     series: $setup.series
-  }, null, 8 /* PROPS */, ["options", "series"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [_hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.appointments, function (item, index) {
+  }, null, 8 /* PROPS */, ["options", "series"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_37, "Processing (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.currentPage) + "/ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.totalPage) + ")...", 1 /* TEXT */), _hoisted_38])])]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [_hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.totalResultTable) + " Appointments ", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_46, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.totalTime), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [_hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_52, [_hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.appointmentsTable, function (item, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       dusk: "1-row",
       "class": "group",
       key: index
-    }, [_hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.id), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.id), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: item.patient_image_url ? item.patient_image_url : 'https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300',
       "class": "inline-block rounded-full",
       draggable: "false",
       style: {
         "max-width": "30px"
       }
-    }, null, 8 /* PROPS */, _hoisted_48), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.patient_name ? item.patient_name : '.....'), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.start_time), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.created_at), 1 /* TEXT */)])])]);
-  }), 128 /* KEYED_FRAGMENT */))])])])])])])])], 2 /* CLASS */)]);
+    }, null, 8 /* PROPS */, _hoisted_60), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.patient_name ? item.patient_name : "....."), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_66, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.readAbleDateTime(item.start_time)), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.readAbleDateTime(item.created_at)), 1 /* TEXT */)])])]);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Showing " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_73, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.appointmentsTable.length), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.perPageTable), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " of " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_75, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.totalResultTable), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " results. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" | ") + " "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.currentPageTable), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" ") + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)("page of ") + " "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_77, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.totalTable), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pages " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(" "))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_78, [$setup.currentPageTable > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+    key: 0,
+    href: "#",
+    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.PrevPage && $setup.PrevPage.apply($setup, arguments);
+    }, ["prevent"])),
+    "class": "relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+  }, "Previous")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.currentPageTable < $setup.totalTable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+    key: 1,
+    href: "#",
+    onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.NextPage && $setup.NextPage.apply($setup, arguments);
+    }, ["prevent"])),
+    "class": "relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+  }, "Next")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])])])])], 2 /* CLASS */)]);
 }
 
 /***/ }),
