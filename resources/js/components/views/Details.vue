@@ -561,7 +561,7 @@ export default {
       if(this.store.practitioner.id == 14615){ // dr affan
         min = 15;
       }else if(this.store.practitioner.id == 72952){ //dr joe
-        min = 45;
+        min = 30;
       }
       else if(this.store.practitioner.id == 26362){ // dr saira
         min = 30;
@@ -578,7 +578,7 @@ export default {
           start_time: this.store.availableTime.start_time,
           finish_time: finish_date_time,
           practitioner_id: this.store.practitioner.id,
-          reason: "Dr Affan consultation new patient exam",
+          reason: "New Consultation",
           patient_id: this.store.details.id,
         })
         .then((response) => {
