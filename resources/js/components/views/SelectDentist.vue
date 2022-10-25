@@ -23,7 +23,7 @@
               (Dentist.id == 14615 && this.store.treatments.key == 1) ||
               (Dentist.id == 44633 && this.store.treatments.key == 1) ||
               (Dentist.id == 46230 && this.store.treatments.key == 1) || 
-              (Dentist.id == 26362 && this.store.treatments.key == 2) ||
+              (Dentist.id == 26362 && this.store.treatments.key == 1) ||
               (Dentist.id == 72952 && this.store.treatments.key == 2) 
             "
             class="hover:px-2"
