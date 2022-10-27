@@ -3,7 +3,7 @@
     <div class="w-full space-y-14" :class="{ dark: dark }">
       <div class="w-full flex flex-col items-start space-y-5">
         <span class="font-medium text-2xl text-gray-900 dark:text-gray-300"
-          >Report Generator {{ dark }}</span
+          >Report Generator</span
         >
         <div class="w-full flex md:flex-row flex-col items-start space-y-4 md:space-y-0 md:justify-between md:items-center">
           <div class="flex md:flex-row flex-col items-start space-y-4 md:space-y-0 md:items-center md:space-x-14">
