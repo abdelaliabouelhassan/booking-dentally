@@ -1,102 +1,121 @@
 /* Nova Tool CSS */
-.my-component-scoped .flex {
+.my-component-livereport .m-auto {
+    margin: auto
+}
+.my-component-livereport .mr-2 {
+    margin-right: 0.5rem
+}
+.my-component-livereport .flex {
     display: flex
 }
-.my-component-scoped .h-\[100px\] {
+.my-component-livereport .h-\[400px\] {
+    height: 400px
+}
+.my-component-livereport .h-8 {
+    height: 2rem
+}
+.my-component-livereport .h-\[100px\] {
     height: 100px
 }
-.my-component-scoped .w-full {
+.my-component-livereport .w-full {
     width: 100%
 }
-.my-component-scoped .w-\[100px\] {
+.my-component-livereport .w-8 {
+    width: 2rem
+}
+.my-component-livereport .w-\[100px\] {
     width: 100px
 }
-.my-component-scoped .grid-cols-5 {
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+.my-component-livereport .animate-spin {
+    animation: spin 1s linear infinite
+}
+.my-component-livereport .grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr))
 }
-.my-component-scoped .flex-col {
+.my-component-livereport .flex-col {
     flex-direction: column
 }
-.my-component-scoped .items-center {
+.my-component-livereport .items-center {
     align-items: center
 }
-.my-component-scoped .gap-10 {
+.my-component-livereport .gap-10 {
     gap: 2.5rem
 }
-.my-component-scoped .space-y-2 > :not([hidden]) ~ :not([hidden]) {
+.my-component-livereport .space-y-2 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
 }
-.my-component-scoped .space-y-1 > :not([hidden]) ~ :not([hidden]) {
+.my-component-livereport .space-y-1 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0.25rem * var(--tw-space-y-reverse))
 }
-.my-component-scoped .overflow-hidden {
+.my-component-livereport .overflow-hidden {
     overflow: hidden
 }
-.my-component-scoped .rounded-md {
+.my-component-livereport .rounded-md {
     border-radius: 0.375rem
 }
-.my-component-scoped .rounded-full {
+.my-component-livereport .rounded-full {
     border-radius: 9999px
 }
-.my-component-scoped .bg-white {
+.my-component-livereport .bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity))
 }
-.my-component-scoped .bg-gray-300 {
+.my-component-livereport .bg-gray-300 {
     --tw-bg-opacity: 1;
     background-color: rgb(209 213 219 / var(--tw-bg-opacity))
 }
-.my-component-scoped .bg-gray-400 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(156 163 175 / var(--tw-bg-opacity))
+.my-component-livereport .fill-blue-600 {
+    fill: #2563eb
 }
-.my-component-scoped .p-5 {
+.my-component-livereport .p-5 {
     padding: 1.25rem
 }
-.my-component-scoped .text-sm {
+.my-component-livereport .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem
 }
-.my-component-scoped .text-base {
+.my-component-livereport .text-base {
     font-size: 1rem;
     line-height: 1.5rem
 }
-.my-component-scoped .font-bold {
+.my-component-livereport .font-bold {
     font-weight: 700
 }
-.my-component-scoped .text-\[\#1C1C1C\] {
+.my-component-livereport .text-gray-200 {
     --tw-text-opacity: 1;
-    color: rgb(28 28 28 / var(--tw-text-opacity))
+    color: rgb(229 231 235 / var(--tw-text-opacity))
 }
-.my-component-scoped .text-gray-900 {
+.my-component-livereport .text-gray-900 {
     --tw-text-opacity: 1;
     color: rgb(17 24 39 / var(--tw-text-opacity))
 }
-.my-component-scoped .text-\[text-blue-500\] {
-    color: text-blue-500
-}
-.my-component-scoped .text-blue-500 {
+.my-component-livereport .text-blue-500 {
     --tw-text-opacity: 1;
     color: rgb(59 130 246 / var(--tw-text-opacity))
 }
-.my-component-scoped .shadow-sm {
+.my-component-livereport .shadow-sm {
     --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
-.my-component-scoped .dark .dark\:bg-gray-800 {
+.my-component-livereport .dark .dark\:bg-gray-800 {
     --tw-bg-opacity: 1;
     background-color: rgb(31 41 55 / var(--tw-bg-opacity))
 }
-.my-component-scoped .dark .dark\:text-\[\#1C1C1C\] {
+.my-component-livereport .dark .dark\:text-gray-600 {
     --tw-text-opacity: 1;
-    color: rgb(28 28 28 / var(--tw-text-opacity))
+    color: rgb(75 85 99 / var(--tw-text-opacity))
 }
-.my-component-scoped .dark .dark\:text-gray-300 {
+.my-component-livereport .dark .dark\:text-gray-300 {
     --tw-text-opacity: 1;
     color: rgb(209 213 219 / var(--tw-text-opacity))
 }
