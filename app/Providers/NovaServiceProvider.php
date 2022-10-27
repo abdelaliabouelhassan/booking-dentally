@@ -12,6 +12,7 @@ use Report\Report\Report;
 use Illuminate\Http\Request;
 use Laravel\Nova\Menu\MenuItem;
 use Laravel\Nova\Menu\MenuSection;
+use Report\Reportlive\Reportlive;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -39,7 +40,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::make('Report', [
                     MenuItem::make('Report', '/report'),
-                    MenuItem::make('Live Reporting', '/live-report'),
+                    MenuItem::make('Live Reporting', '/reportlive'),
                 ])->icon('chart-bar')->collapsable(),
 
               
@@ -97,6 +98,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
             new Report,
+            new Reportlive
         ];
     }
 

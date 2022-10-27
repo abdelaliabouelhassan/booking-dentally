@@ -14,7 +14,8 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/nova": "~4.0",
-        "report/report": "*"
+        "report/report": "*",
+        "report/reportlive": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -32,6 +33,10 @@
         {
             "type": "path",
             "url": "./nova-components/Report"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/Reportlive"
         }
     ],
     "autoload": {
