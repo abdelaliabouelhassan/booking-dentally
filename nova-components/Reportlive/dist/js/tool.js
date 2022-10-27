@@ -45,7 +45,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
     //
     var practitioners = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    var participantIds = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([14615, 44633, 46230, 26362]);
+    var participantIds = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([14615, 44633, 46230, 26362, 72952]);
     var participantAvaliable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var participantWithAvailable = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var loadDentist = function loadDentist() {
@@ -60,30 +60,42 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
     var idsCount = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     var loadDentistAvailable = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var start_time, end_time, startTimeString, endTimeString;
+        var start_time, end_time, startTimeString, endTimeString, next_start_time, next_end_time, nextStartTimeString, nextEndTimeString;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 start_time = new Date(); //end time + the rest of the month
                 end_time = new Date();
-                end_time.setMonth(end_time.getMonth() + 2);
-                // let end_time = new Date();
-                // end_time.setDate(end_time.getDate() + 30);
+                end_time.setMonth(end_time.getMonth() + 1);
                 startTimeString = start_time.toISOString();
                 endTimeString = end_time.toISOString();
+                next_start_time = new Date();
+                next_start_time.setMonth(next_start_time.getMonth() + 1);
+                next_end_time = new Date();
+                next_end_time.setMonth(next_end_time.getMonth() + 2);
+                nextStartTimeString = next_start_time.toISOString();
+                nextEndTimeString = next_end_time.toISOString();
                 console.log(idsCount.value);
                 loading.value = true;
-                _context.next = 9;
+                _context.next = 15;
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("appointments/availability?practitioner_ids%5B%5D=" + participantIds.value[[idsCount.value]] + "&start_time=" + startTimeString + "&finish_time=" + endTimeString).then(function (response) {
                   participantAvaliable.value.push({
                     id: participantIds[idsCount],
-                    thisMonth: response.data.availability.length
+                    thisMonth: response.data.availability.length,
+                    nextMonth: []
                   });
                   loading.value = false;
                   console.log(response.data);
                 });
-              case 9:
+              case 15:
+                _context.next = 17;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("appointments/availability?practitioner_ids%5B%5D=" + participantIds.value[[idsCount.value]] + "&start_time=" + nextStartTimeString + "&finish_time=" + nextEndTimeString).then(function (response) {
+                  participantAvaliable.value[[idsCount.value]].nextMonth = response.data.availability.length;
+                  loading.value = false;
+                  console.log(response.data);
+                });
+              case 17:
                 idsCount.value = idsCount.value + 1;
                 if (idsCount.value < participantIds.value.length) {
                   loadDentistAvailable();
@@ -91,7 +103,7 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
                   console.log("gg");
                   JoinParticipantWithAvailable();
                 }
-              case 11:
+              case 19:
               case "end":
                 return _context.stop();
             }
@@ -113,7 +125,9 @@ axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common.Authorizat
             participantWithAvailable.value.push({
               id: participantIds.value[i],
               name: practitioners.value[j].user.first_name + " " + practitioners.value[j].user.last_name,
-              thisMonth: participantAvaliable.value[i].thisMonth
+              user: practitioners.value[j].user,
+              thisMonth: participantAvaliable.value[i].thisMonth,
+              nextMonth: participantAvaliable.value[i].nextMonth
             });
           }
         }
@@ -153,12 +167,51 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "my-component-scoped"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": ""
-}, " sdsfdsfdsfdsf ", -1 /* HOISTED */);
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_2 = {
+  "class": "w-full flex flex-col items-center space-y-2"
+};
+var _hoisted_3 = {
+  "class": "w-[100px] h-[100px] rounded-full bg-gray-300 overflow-hidden"
+};
+var _hoisted_4 = ["src", "alt"];
+var _hoisted_5 = {
+  "class": "flex flex-col items-center space-y-1"
+};
+var _hoisted_6 = {
+  "class": "text-sm font-bold text-gray-900 dark:text-gray-300"
+};
+var _hoisted_7 = {
+  "class": "flex flex-col items-center space-y-1"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-bold text-gray-900 dark:text-gray-300"
+}, "THIS MONTH", -1 /* HOISTED */);
+var _hoisted_9 = {
+  "class": "text-base font-bold text-blue-500"
+};
+var _hoisted_10 = {
+  "class": "flex flex-col items-center space-y-1"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-sm font-bold text-gray-900 dark:text-gray-300"
+}, "NEXT MONTH", -1 /* HOISTED */);
+var _hoisted_12 = {
+  "class": "text-base font-bold text-blue-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-full flex grid-cols-5 gap-10", {
+      dark: $setup.dark
+    }])
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.participantWithAvailable, function (item, index, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "w-full rounded-md bg-gray-400 dark:bg-gray-800 p-5 shadow-sm",
+      key: key
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: item.user.image_url,
+      alt: item.name
+    }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.thisMonth) + " Slots Available", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.nextMonth) + " Slots Available", 1 /* TEXT */)])])]);
+  }), 128 /* KEYED_FRAGMENT */))], 2 /* CLASS */)]);
 }
 
 /***/ }),
