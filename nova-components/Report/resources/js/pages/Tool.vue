@@ -55,7 +55,7 @@
                   dark:bg-gray-800
                   w-[400px]
                   space-y-8
-                  z-30
+                  z-50
                   top-10
                 "
               >
@@ -183,7 +183,7 @@
                   dark:bg-gray-800
                   w-[400px]
                   space-y-8
-                  z-30
+                  z-50
                   top-10
                 "
               >
@@ -329,7 +329,7 @@
                 dark:bg-gray-800
                 w-[200px]
                 space-y-8
-                z-30
+                z-50
                 top-12
                 right-10
               "
@@ -381,6 +381,7 @@
           type="bar"
           :options="options"
           :series="series"
+          ref="chartRef"
         ></apexchart>
 
         <div
@@ -401,7 +402,7 @@
         </div>
       </div>
       <div class="w-full flex flex-col items-start space-y-8">
-        <div class="flex items-start space-x-10">
+      <div class="flex items-start space-x-10">
           <div class="flex flex-col items-start space-y-2">
             <span
               class="
@@ -513,8 +514,60 @@
                           py-2
                         "
                       >
-                        <span>patient image</span>
+                        <span></span>
                       </th>
+                       <th
+                        class="
+                          text-left
+                          px-2
+                          whitespace-nowrap
+                          uppercase
+                          text-gray-500 text-xxs
+                          tracking-wide
+                          py-2
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="
+                            cursor-pointer
+                            inline-flex
+                            items-center
+                            focus:outline-none focus:ring
+                            ring-primary-200
+                            dark:ring-gray-600
+                            rounded
+                          "
+                          dusk="sort-name"
+                          aria-sort="none"
+                        >
+                          <span
+                            class="
+                              inline-flex
+                              font-sans font-bold
+                              uppercase
+                              text-xxs
+                              tracking-wide
+                              text-gray-500
+                            "
+                            >practitioner</span
+                          >
+                        </button>
+                      </th>
+                      <th
+                        class="
+                          text-center
+                          px-2
+                          whitespace-nowrap
+                          uppercase
+                          text-gray-500 text-xxs
+                          tracking-wide
+                          py-2
+                        "
+                      >
+                        <span></span>
+                      </th>
+                      
                       <th
                         class="
                           text-left
@@ -711,6 +764,57 @@
                           }}</a>
                         </div>
                       </td>
+                        <td
+                        class="
+                          px-2
+                          py-2
+                          border-t border-gray-100
+                          dark:border-gray-700
+                          whitespace-nowrap
+                          cursor-pointer
+                          dark:bg-gray-800
+                          group-hover:bg-gray-50
+                          dark:group-hover:bg-gray-900
+                        "
+                      >
+                        <div
+                          class="items-center justify-center flex text-center"
+                          resource="[object Object]"
+                        >
+                         <img
+                            :src="
+                              item.practitioner_image
+                                ? item.practitioner_image
+                                : 'https://www.gravatar.com/avatar/91877a2c1027667fd8f5c470e14a31a6?s=300'
+                            "
+                            class="inline-block rounded-full"
+                            draggable="false"
+                            style="max-width: 30px"
+                          />
+                        </div>
+                      </td>
+                       <td
+                        class="
+                          px-2
+                          py-2
+                          border-t border-gray-100
+                          dark:border-gray-700
+                          whitespace-nowrap
+                          cursor-pointer
+                          dark:bg-gray-800
+                          group-hover:bg-gray-50
+                          dark:group-hover:bg-gray-900
+                        "
+                      >
+                        <div
+                          class="items-center justify-center flex text-center"
+                          resource="[object Object]"
+                        >
+                         <span class="text-90 whitespace-nowrap">{{
+                            item.practitioner_name
+                          }}</span>
+                        </div>
+                      </td>
                       <td
                         class="
                           px-2
@@ -737,7 +841,7 @@
                             class="inline-block rounded-full"
                             draggable="false"
                             style="max-width: 30px"
-                          /><!----><!----><!----><!---->
+                          />
                         </div>
                       </td>
                       <td
@@ -755,7 +859,7 @@
                       >
                         <div class="text-left" resource="[object Object]">
                           <span class="text-90 whitespace-nowrap">{{
-                            item.patient_name ? item.patient_name : "....."
+                            item.patient_name
                           }}</span>
                         </div>
                       </td>
@@ -911,6 +1015,8 @@
         </div>
       </div>
     </div>
+         <div class=" absolute w-full h-full  top-0 left-0 z-40" @click="showReason = false;showPractitioner = false;showDate = false;" v-if="showReason || showPractitioner || showDate"></div>
+
   </div>
 </template>
 
@@ -950,7 +1056,7 @@ export default {
     const perPage = ref(100);
     const totalPage = ref(1);
     const currentPageTable = ref(1);
-    const perPageTable = ref(25);
+    const perPageTable = ref(100);
     const totalTable = ref(0);
     const totalResultTable = ref(0);
     const FilterPeriode = ref([
@@ -1109,6 +1215,15 @@ export default {
     const SelectedResons = ref([]);
     const Practitioners = ref([]);
     const SelectedPractitioners = ref(null);
+    const ExcludeResults = ref([
+      "",
+      null,
+      'NOT AVAILABLE DO NOT DELETE',
+      'DO NOT DELETE',
+      'Other',
+      '.....'
+    ]);
+    const chartRef = ref(null);
     onMounted(() => {
       dark.value = document.documentElement.classList.contains("dark");
 
@@ -1130,12 +1245,15 @@ export default {
       Resons.value.forEach((item) => {
         SelectedResons.value.push(item.value);
       });
+      currentPage.value = 1;
       loadPaginatedAppointments();
     };
     const SelectAllPractitioner = () => {
       Practitioners.value.forEach((item) => {
         SelectedPractitioners.value.push(item.id);
       });
+      currentPage.value = 1;
+      currentPageTable.value = 1;
       loadPaginatedAppointments();
     };
     const SelectNextPeriode = () => {
@@ -1147,6 +1265,7 @@ export default {
       FilterPeriode.value[PeriodeIndex.value].active = true;
       appointments.value = [];
       currentPage.value = 1;
+      currentPageTable.value = 1;
       showDate.value = false;
       loadAppointments();
       loadPaginatedAppointments();
@@ -1159,7 +1278,8 @@ export default {
       }
       FilterPeriode.value[PeriodeIndex.value].active = true;
       appointments.value = [];
-      currentPage.value = 1;
+     currentPage.value = 1;
+      currentPageTable.value = 1;
       showDate.value = false;
       loadAppointments();
       loadPaginatedAppointments();
@@ -1319,12 +1439,37 @@ export default {
           currentPageTable.value
       );
       appointmentsTable.value = response.data.appointments;
-      //appointmentsTable = filtered by SelectedResons
+      //appointmentsTable = filtered by SelectedResons and
       if (SelectedResons.value.length > 0) {
         appointmentsTable.value = appointmentsTable.value.filter((item) => {
           return SelectedResons.value.includes(item.reason);
         });
       }
+
+
+      //ExcludeResults in appointmentsTable Resions and patient_name
+      if (ExcludeResults.value.length > 0) {
+        appointmentsTable.value = appointmentsTable.value.filter((item) => {
+          return !ExcludeResults.value.includes(item.reason);
+        });
+        appointmentsTable.value = appointmentsTable.value.filter((item) => {
+          return !ExcludeResults.value.includes(item.patient_name);
+        });
+      }
+      
+      //add Practitioner name to appointmentsTable when appointmentsTable.practitioner_id = practitioners.id
+      appointmentsTable.value.forEach((item) => {
+        item.practitioner_name = Practitioners.value.find(
+          (practitioner) => practitioner.id === item.practitioner_id
+        ).user.first_name;
+      });
+
+      //add image to appointmentsTable when appointmentsTable.patient_id = patients.id
+      appointmentsTable.value.forEach((item) => {
+        item.practitioner_image = Practitioners.value.find(
+          (practitioner) => practitioner.id === item.practitioner_id
+        ).user.image_url;
+      });
 
       totalTable.value = response.data.meta.total_pages;
       totalResultTable.value = response.data.meta.total;
@@ -1446,6 +1591,10 @@ export default {
       return strTime + " /" + day + "/" + month + "/" + year;
     };
 
+    const dataURL = () => {
+
+    }
+
     //watch SelectedResons to get the appointments
     watch(
       () => [SelectedResons.value, PeriodeIndex.value],
@@ -1472,6 +1621,7 @@ export default {
         );
         appointments.value = [];
       currentPage.value = 1;
+      currentPageTable.value = 1;
         await loadPaginatedAppointments();
         await loadAppointments();
         // getTotalTime();
@@ -1479,9 +1629,9 @@ export default {
     );
 
     onMounted(() => {
+       loadPractitioners();
       loadAppointments();
       loadPaginatedAppointments();
-      loadPractitioners();
     });
 
     onBeforeUnmount(() => {
@@ -1518,6 +1668,7 @@ export default {
       SelectAllResons,
       Practitioners,
       SelectedPractitioners,
+      chartRef
     };
   },
 };
